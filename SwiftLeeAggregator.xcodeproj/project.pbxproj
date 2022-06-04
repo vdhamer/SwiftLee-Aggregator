@@ -7,18 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0E698D6284BD2FB003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698D5284BD2FB003D6AB8 /* SwiftLeeAggregatorApp.swift */; };
-		D0E698D8284BD2FB003D6AB8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698D7284BD2FB003D6AB8 /* ContentView.swift */; };
-		D0E698DA284BD2FC003D6AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698D9284BD2FC003D6AB8 /* Assets.xcassets */; };
-		D0E698DD284BD2FC003D6AB8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698DC284BD2FC003D6AB8 /* Preview Assets.xcassets */; };
+		D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */; };
+		D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698F4284BF679003D6AB8 /* Assets.xcassets */; };
+		D0E69906284BF679003D6AB8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698F6284BF679003D6AB8 /* Preview Assets.xcassets */; };
+		D0E69907284BF679003D6AB8 /* ApiKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F8284BF679003D6AB8 /* ApiKey_.swift */; };
+		D0E69908284BF679003D6AB8 /* Posting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FA284BF679003D6AB8 /* Posting.swift */; };
+		D0E69909284BF679003D6AB8 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FB284BF679003D6AB8 /* Page.swift */; };
+		D0E6990A284BF679003D6AB8 /* PostingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FD284BF679003D6AB8 /* PostingsView.swift */; };
+		D0E6990B284BF679003D6AB8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D0E69901284BF679003D6AB8 /* .gitignore */; };
+		D0E6990C284BF679003D6AB8 /* BLANK_README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0E69903284BF679003D6AB8 /* BLANK_README.md */; };
+		D0E69910284C09EF003D6AB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E6990E284C09EF003D6AB8 /* Localizable.strings */; };
+		D0E69913284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E69911284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings */; };
+		D0E69917284C1058003D6AB8 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E69916284C1058003D6AB8 /* ApiKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D0E698D2284BD2FB003D6AB8 /* SwiftLeeAggregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLeeAggregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0E698D5284BD2FB003D6AB8 /* SwiftLeeAggregatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLeeAggregatorApp.swift; sourceTree = "<group>"; };
-		D0E698D7284BD2FB003D6AB8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D0E698D9284BD2FC003D6AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D0E698DC284BD2FC003D6AB8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLeeAggregatorApp.swift; sourceTree = "<group>"; };
+		D0E698F4284BF679003D6AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D0E698F6284BF679003D6AB8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D0E698F8284BF679003D6AB8 /* ApiKey_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey_.swift; sourceTree = "<group>"; };
+		D0E698FA284BF679003D6AB8 /* Posting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posting.swift; sourceTree = "<group>"; };
+		D0E698FB284BF679003D6AB8 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		D0E698FD284BF679003D6AB8 /* PostingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostingsView.swift; sourceTree = "<group>"; };
+		D0E69901284BF679003D6AB8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D0E69903284BF679003D6AB8 /* BLANK_README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = BLANK_README.md; sourceTree = "<group>"; };
+		D0E69914284C09FF003D6AB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/SwiftLeeAggregator-InfoPlist.strings"; sourceTree = "<group>"; };
+		D0E69915284C0B5E003D6AB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0E69916284C1058003D6AB8 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +51,7 @@
 		D0E698C9284BD2FB003D6AB8 = {
 			isa = PBXGroup;
 			children = (
-				D0E698D4284BD2FB003D6AB8 /* SwiftLeeAggregator */,
+				D0E698F1284BF679003D6AB8 /* SwiftLeeAggregator */,
 				D0E698D3284BD2FB003D6AB8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,23 +64,63 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D0E698D4284BD2FB003D6AB8 /* SwiftLeeAggregator */ = {
+		D0E698F1284BF679003D6AB8 /* SwiftLeeAggregator */ = {
 			isa = PBXGroup;
 			children = (
-				D0E698D5284BD2FB003D6AB8 /* SwiftLeeAggregatorApp.swift */,
-				D0E698D7284BD2FB003D6AB8 /* ContentView.swift */,
-				D0E698D9284BD2FC003D6AB8 /* Assets.xcassets */,
-				D0E698DB284BD2FC003D6AB8 /* Preview Content */,
+				D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */,
+				D0E698F4284BF679003D6AB8 /* Assets.xcassets */,
+				D0E698FC284BF679003D6AB8 /* Views */,
+				D0E698F9284BF679003D6AB8 /* Model */,
+				D0E698F7284BF679003D6AB8 /* Utilities */,
+				D0E698F5284BF679003D6AB8 /* Preview Content */,
+				D0E6990E284C09EF003D6AB8 /* Localizable.strings */,
+				D0E69911284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings */,
+				D0E69901284BF679003D6AB8 /* .gitignore */,
+				D0E69902284BF679003D6AB8 /* .github */,
 			);
-			path = SwiftLeeAggregator;
+			name = SwiftLeeAggregator;
 			sourceTree = "<group>";
 		};
-		D0E698DB284BD2FC003D6AB8 /* Preview Content */ = {
+		D0E698F5284BF679003D6AB8 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				D0E698DC284BD2FC003D6AB8 /* Preview Assets.xcassets */,
+				D0E698F6284BF679003D6AB8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D0E698F7284BF679003D6AB8 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D0E698F8284BF679003D6AB8 /* ApiKey_.swift */,
+				D0E69916284C1058003D6AB8 /* ApiKey.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D0E698F9284BF679003D6AB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D0E698FA284BF679003D6AB8 /* Posting.swift */,
+				D0E698FB284BF679003D6AB8 /* Page.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D0E698FC284BF679003D6AB8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D0E698FD284BF679003D6AB8 /* PostingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D0E69902284BF679003D6AB8 /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				D0E69903284BF679003D6AB8 /* BLANK_README.md */,
+			);
+			path = .github;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +133,7 @@
 				D0E698CE284BD2FB003D6AB8 /* Sources */,
 				D0E698CF284BD2FB003D6AB8 /* Frameworks */,
 				D0E698D0284BD2FB003D6AB8 /* Resources */,
+				D0E69918284C23BF003D6AB8 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -125,24 +182,72 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E698DD284BD2FC003D6AB8 /* Preview Assets.xcassets in Resources */,
-				D0E698DA284BD2FC003D6AB8 /* Assets.xcassets in Resources */,
+				D0E69910284C09EF003D6AB8 /* Localizable.strings in Resources */,
+				D0E6990B284BF679003D6AB8 /* .gitignore in Resources */,
+				D0E6990C284BF679003D6AB8 /* BLANK_README.md in Resources */,
+				D0E69906284BF679003D6AB8 /* Preview Assets.xcassets in Resources */,
+				D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */,
+				D0E69913284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D0E69918284C23BF003D6AB8 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D0E698CE284BD2FB003D6AB8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0E698D8284BD2FB003D6AB8 /* ContentView.swift in Sources */,
-				D0E698D6284BD2FB003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
+				D0E6990A284BF679003D6AB8 /* PostingsView.swift in Sources */,
+				D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
+				D0E69908284BF679003D6AB8 /* Posting.swift in Sources */,
+				D0E69909284BF679003D6AB8 /* Page.swift in Sources */,
+				D0E69917284C1058003D6AB8 /* ApiKey.swift in Sources */,
+				D0E69907284BF679003D6AB8 /* ApiKey_.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D0E6990E284C09EF003D6AB8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0E69915284C0B5E003D6AB8 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D0E69911284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D0E69914284C09FF003D6AB8 /* en */,
+			);
+			name = "SwiftLeeAggregator-InfoPlist.strings";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		D0E698DE284BD2FC003D6AB8 /* Debug */ = {
@@ -268,7 +373,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SwiftLeeAggregator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -277,13 +382,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vdhamer.SwiftLeeAggregator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftLeeAggregator;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -297,7 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SwiftLeeAggregator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -306,13 +412,14 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vdhamer.SwiftLeeAggregator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SwiftLeeAggregator;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
