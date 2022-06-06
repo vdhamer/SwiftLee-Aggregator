@@ -33,11 +33,11 @@
 </details>
 
 ## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/vdhamer/SwiftLeeAggregator)
 
 This app aggregates blog posting by SwiftLee (Antoine van der Lee), who has a blog on iOS software development. 
 
-Please note that this app is only **a SwiftLee aggregator and not an app developed by SwiftLee**. Like any RSS aggregator, the author of the aggregator has no influence on SwiftLee’s blog posts. And SwiftLee has no responsibility for the aggregator. In case you are wondering, both parties did align ;-)
+Note that this app is only **a SwiftLee aggregator and not an app developed by SwiftLee**. Like any RSS aggregator, the author of the aggregator has no influence on SwiftLee’s blog posts. And SwiftLee has no responsibility for the aggregator. In case you are wondering, both parties did align ;-)
 
 The aggregator asynchronously fetches data from an existing SwiftLee RSS feed. The RSS data is converted to JSON on the fly via an online RSS-to-JSON convertor. And the JSON is then decoded and rendered within the app. Clicking on a item in the aggregator opens the associated SwiftLee post in a browser tab.
 
