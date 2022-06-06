@@ -22,9 +22,9 @@ struct PostingsView: View {
                 List {
                     ForEach(blogPosts) { blogPost in
                         HStack(alignment: .top) {
-                            Image(systemName: "doc.text.image")
-                                .padding(5)
-                                .foregroundColor(.cyan)
+                            Image(systemName: "envelope.fill") // see also "envelope.open.fill"
+                                .padding(.top, 4.5)
+                                .foregroundColor(.brown)
                             VStack(alignment: .leading) {
                                 Link(destination: blogPost.url, label: {
                                     Text(blogPost.title)
@@ -38,6 +38,7 @@ struct PostingsView: View {
                                     .truncationMode(.head)
                                     .foregroundColor(.gray)
                                 Text(viewDateFormatter.string(from: blogPost.pubDate))
+                                    .font(.footnote)
                             }
 
                         }
@@ -60,7 +61,8 @@ struct PostingsView: View {
                         }
                     }
                 }
-                .navigationTitle("SwiftLee (\(blogPosts.count) posts)")
+                .navigationTitle("SwiftLee (\(blogPosts.count) " +
+                                 "\(blogPosts.count==1 ? "post" : "posts"))") // fancy plural
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
         }
