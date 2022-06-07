@@ -69,7 +69,7 @@ struct PostingsView: View {
     }
 
     func fetchJsonData() async -> [Posting] {
-        let url = URL(string: swiftLeeFeed2Url+"&api_key=\(apiKey)&count=11")!
+        let url = URL(string: swiftLeeFeed2Url+"&api_key=\(apiKey)")!
         print(url.absoluteString)
         let decoder = getDecoder()
         var request = URLRequest(url: url)
