@@ -35,7 +35,7 @@
 ## About The Project
 [![Product Name Screen Shot][product-screenshot]](https://github.com/vdhamer/SwiftLeeAggregator)
 
-This app aggregates blog posting by SwiftLee (Antoine van der Lee), who has a blog on iOS software development. 
+This app aggregates blog posts by SwiftLee (Antoine van der Lee), who has a blog on iOS software development. 
 
 Note that this app is only **a SwiftLee aggregator and not an app developed by SwiftLee**. Like any RSS aggregator, the author of the aggregator has no influence on SwiftLee’s blog posts. And SwiftLee has no responsibility for the aggregator. In case you are wondering, both parties did align ;-)
 

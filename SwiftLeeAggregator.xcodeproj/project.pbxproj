@@ -17,7 +17,6 @@
 		D0E69909284BF679003D6AB8 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FB284BF679003D6AB8 /* Page.swift */; };
 		D0E6990A284BF679003D6AB8 /* PostingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FD284BF679003D6AB8 /* PostingsView.swift */; };
 		D0E6990B284BF679003D6AB8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D0E69901284BF679003D6AB8 /* .gitignore */; };
-		D0E6990C284BF679003D6AB8 /* BLANK_README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0E69903284BF679003D6AB8 /* BLANK_README.md */; };
 		D0E69910284C09EF003D6AB8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E6990E284C09EF003D6AB8 /* Localizable.strings */; };
 		D0E69913284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0E69911284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings */; };
 		D0E69917284C1058003D6AB8 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E69916284C1058003D6AB8 /* ApiKey.swift */; };
@@ -35,7 +34,6 @@
 		D0E698FB284BF679003D6AB8 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D0E698FD284BF679003D6AB8 /* PostingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostingsView.swift; sourceTree = "<group>"; };
 		D0E69901284BF679003D6AB8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		D0E69903284BF679003D6AB8 /* BLANK_README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = BLANK_README.md; sourceTree = "<group>"; };
 		D0E69914284C09FF003D6AB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/SwiftLeeAggregator-InfoPlist.strings"; sourceTree = "<group>"; };
 		D0E69915284C0B5E003D6AB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0E69916284C1058003D6AB8 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				D0410B4A284E0F6B0012E0E3 /* images */,
-				D0E69903284BF679003D6AB8 /* BLANK_README.md */,
 				D0429278284D4DD6001B5810 /* README.md */,
 			);
 			path = .github;
@@ -199,7 +196,6 @@
 				D0410B50284E1EAA0012E0E3 /* screenshot.png in Resources */,
 				D0E69910284C09EF003D6AB8 /* Localizable.strings in Resources */,
 				D0E6990B284BF679003D6AB8 /* .gitignore in Resources */,
-				D0E6990C284BF679003D6AB8 /* BLANK_README.md in Resources */,
 				D0429279284D4DD6001B5810 /* README.md in Resources */,
 				D0E69906284BF679003D6AB8 /* Preview Assets.xcassets in Resources */,
 				D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */,
