@@ -13,7 +13,7 @@
 		D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698F4284BF679003D6AB8 /* Assets.xcassets */; };
 		D0E69906284BF679003D6AB8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698F6284BF679003D6AB8 /* Preview Assets.xcassets */; };
 		D0E69907284BF679003D6AB8 /* ApiKey_.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F8284BF679003D6AB8 /* ApiKey_.swift */; };
-		D0E69908284BF679003D6AB8 /* Posting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FA284BF679003D6AB8 /* Posting.swift */; };
+		D0E69908284BF679003D6AB8 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FA284BF679003D6AB8 /* Post.swift */; };
 		D0E69909284BF679003D6AB8 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FB284BF679003D6AB8 /* Page.swift */; };
 		D0E6990A284BF679003D6AB8 /* PostingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698FD284BF679003D6AB8 /* PostingsView.swift */; };
 		D0E6990B284BF679003D6AB8 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = D0E69901284BF679003D6AB8 /* .gitignore */; };
@@ -30,7 +30,7 @@
 		D0E698F4284BF679003D6AB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0E698F6284BF679003D6AB8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D0E698F8284BF679003D6AB8 /* ApiKey_.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKey_.swift; sourceTree = "<group>"; };
-		D0E698FA284BF679003D6AB8 /* Posting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posting.swift; sourceTree = "<group>"; };
+		D0E698FA284BF679003D6AB8 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D0E698FB284BF679003D6AB8 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		D0E698FD284BF679003D6AB8 /* PostingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostingsView.swift; sourceTree = "<group>"; };
 		D0E69901284BF679003D6AB8 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		D0E698F9284BF679003D6AB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0E698FA284BF679003D6AB8 /* Posting.swift */,
+				D0E698FA284BF679003D6AB8 /* Post.swift */,
 				D0E698FB284BF679003D6AB8 /* Page.swift */,
 			);
 			path = Model;
@@ -233,7 +233,7 @@
 			files = (
 				D0E6990A284BF679003D6AB8 /* PostingsView.swift in Sources */,
 				D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
-				D0E69908284BF679003D6AB8 /* Posting.swift in Sources */,
+				D0E69908284BF679003D6AB8 /* Post.swift in Sources */,
 				D0E69909284BF679003D6AB8 /* Page.swift in Sources */,
 				D0E69917284C1058003D6AB8 /* ApiKey.swift in Sources */,
 				D0E69907284BF679003D6AB8 /* ApiKey_.swift in Sources */,

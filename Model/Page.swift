@@ -17,7 +17,7 @@ struct Page: Decodable, Identifiable {
 
     let status: String
     let feed: WrappedPosting
-    let postings: [Posting]
+    let postings: [Post]
 
     var id: URL {
         feed.url

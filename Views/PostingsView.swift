@@ -9,11 +9,11 @@ import SwiftUI
 
 struct PostingsView: View {
 
-    @State var blogPosts: [Posting]
+    @State var blogPosts: [Post]
     private let jsonDateFormatter = DateFormatter()
     private let viewDateFormatter = makeViewDateFormatter()
     var showSimulatedData = false
-    let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged=1"
+    let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
 
     var body: some View {
 
@@ -49,7 +49,7 @@ struct PostingsView: View {
                     if showSimulatedData {
                         do {
                             let jsonData = hardcodedJsonString.data(using: .utf8)!
-                            let newBlogPosts = try getDecoder().decode([Posting].self, from: jsonData)
+                            let newBlogPosts = try getDecoder().decode([Post].self, from: jsonData)
                             blogPosts = newBlogPosts
                         } catch {
                             print("Error decoding hardcoded JSON string")
@@ -57,7 +57,33 @@ struct PostingsView: View {
                         }
                     } else { // fetch online data
                         Task {
-                            blogPosts = await fetchJsonData()
+                            if blogPosts.isEmpty { // we expect blogPosts[] to be empty
+                                var page = 0
+                                var newPage: [Post] // list of posts on the new page
+                                var pageSize = 0 // we determine server's page size dynamically (it is probably 10)
+
+                                repeat { // fetching one page at a time for now
+                                    page += 1
+                                    newPage = await fetchJsonData(page: page)
+                                    blogPosts.append(contentsOf: newPage)
+                                    pageSize = max(pageSize, newPage.count) // largest received page
+                                } while newPage.count == pageSize // stop on empty or partial page
+
+                                // reporting
+                                print("""
+                                      Found a total of \(blogPosts.count) posts \
+                                      on \(blogPosts.count/pageSize) pages \
+                                      with \(pageSize) posts each
+                                      """, terminator: "")
+                                if newPage.count==0 {
+                                    print(".") // no partially filled page at end
+                                } else { // partially filled page at end
+                                    let remainder = blogPosts.count % pageSize
+                                    print(", plus a final page containing the last \(remainder) posts.")
+                                }
+                            } else {
+                                print("Warning: we almost filled the blogPosts array a second time. Check why!")
+                            }
                         }
                     }
                 }
@@ -68,9 +94,10 @@ struct PostingsView: View {
         }
     }
 
-    func fetchJsonData() async -> [Posting] {
-        let url = URL(string: swiftLeeFeed2Url+"&api_key=\(apiKey)")!
-        print(url.absoluteString)
+    func fetchJsonData(page: Int) async -> [Post] {
+        guard page > 0 else { fatalError("page value must be postive (is \(page)") } // a bit paranoid, I guess
+
+        let url = URL(string: swiftLeeFeed2Url+"\(page)&api_key=\(apiKey)")!
         let decoder = getDecoder()
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -79,11 +106,11 @@ struct PostingsView: View {
             let (data, _) = try await URLSession.shared.data(from: url)
 
             let root = try decoder.decode(Page.self, from: data)
-            print("Found \(root.postings.count) Postings on page")
+
             return root.postings
         } catch {
-            print("Decoding of page failed.")
-            return [Posting]()
+            print("Decoding of page failed.") // can happen if page number is too high
+            return [Post]()
         }
     }
 
@@ -126,7 +153,7 @@ private func makeViewDateFormatter() -> DateFormatter {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostingsView(blogPosts: [Posting(title: "MyTitle",
+            PostingsView(blogPosts: [Post(title: "MyTitle",
                                              pubDate: Date()-365*10,
                                              url: URL(string: "http://www.example.com")!,
                                              keywords: ["Swift", "SwiftUI"]
