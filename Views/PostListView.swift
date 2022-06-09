@@ -10,17 +10,18 @@ import SwiftUI
 struct PostListView: View {
 
     @State var blogPosts: [Post]
-    private let jsonDateFormatter = DateFormatter()
-    private let viewDateFormatter = makeViewDateFormatter()
+    private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
+    private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
     var showSimulatedData = false
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
+    @State var searchText: String = ""
 
     var body: some View {
 
         VStack {
             NavigationView {
                 List {
-                    ForEach(blogPosts) { blogPost in
+                    ForEach(searchResults) { blogPost in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
                                 .padding(.top, 4.5)
@@ -44,6 +45,7 @@ struct PostListView: View {
                         }
                     }
                 }
+                .searchable(text: $searchText, prompt: "Title search")
                 .refreshable { }
                 .onAppear {
                     if showSimulatedData {
@@ -87,10 +89,18 @@ struct PostListView: View {
                         }
                     }
                 }
-                .navigationTitle("SwiftLee (\(blogPosts.count) " +
+                .navigationTitle("SwiftLee (\(searchResults.count)/\(blogPosts.count) " +
                                  "\(blogPosts.count==1 ? "post" : "posts"))") // fancy plural
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
+        }
+    }
+
+    var searchResults: [Post] { // helper function to support .searchable() view modifier
+        if searchText.isEmpty {
+            return blogPosts // no filtering
+        } else {
+            return blogPosts.filter { $0.title.lowercased().contains(searchText.lowercased()) } // case insensitive
         }
     }
 
