@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PostingsView: View {
+struct PostListView: View {
 
     @State var blogPosts: [Post]
     private let jsonDateFormatter = DateFormatter()
@@ -153,7 +153,7 @@ private func makeViewDateFormatter() -> DateFormatter {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PostingsView(blogPosts: [Post(title: "MyTitle",
+            PostListView(blogPosts: [Post(title: "MyTitle",
                                              pubDate: Date()-365*10,
                                              url: URL(string: "http://www.example.com")!,
                                              keywords: ["Swift", "SwiftUI"]
