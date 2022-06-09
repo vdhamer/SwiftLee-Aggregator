@@ -81,9 +81,9 @@ There is little to say about usage. Just launch the app. If you click on an post
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Roadmap
-- [ ] Complete the readme
-- [ ] Automatically fetch older posts via extra fetch requests (at 10 posts per request)
-	- [ ] Add a search bar to filter the list (needed if there are hundreds of posts)
+- [x] Complete the readme
+- [x] Automatically fetch older posts via extra fetch requests (at 10 posts per request)
+	- [x] Add a search bar to filter the list (needed if there are hundreds of posts)
 
 See the [open issues](https://github.com/vdhamer/SwiftLeeAggregator/issues) for a full list of proposed features (and known issues).
 
