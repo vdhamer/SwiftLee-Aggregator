@@ -59,15 +59,15 @@ struct PostListView: View {
                         Task {
                             if blogPosts.isEmpty { // we expect blogPosts[] to be empty
                                 var page = 0
-                                var newPage: [Post] // list of posts on the new page
-                                var pageSize = 0 // we determine server's page size dynamically (it is probably 10)
+                                var newPage: [Post] // list of posts on page
+                                var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)
 
-                                repeat { // fetching one page at a time for now
+                                repeat { // fetching one page at a time (note: we don't know home many to expect)
                                     page += 1
                                     newPage = await fetchJsonData(page: page)
                                     blogPosts.append(contentsOf: newPage)
                                     pageSize = max(pageSize, newPage.count) // largest received page
-                                } while newPage.count == pageSize // stop on empty or partial page
+                                } while newPage.count == pageSize // stop on first empty or partially filled page
 
                                 // reporting
                                 print("""
@@ -95,7 +95,7 @@ struct PostListView: View {
     }
 
     func fetchJsonData(page: Int) async -> [Post] {
-        guard page > 0 else { fatalError("page value must be postive (is \(page)") } // a bit paranoid, I guess
+        guard page > 0 else { fatalError("page value must be positive (but is \(page)") } // a bit paranoid, I guess
 
         let url = URL(string: swiftLeeFeed2Url+"\(page)&api_key=\(apiKey)")!
         let decoder = getDecoder()
