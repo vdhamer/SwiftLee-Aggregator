@@ -131,8 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				D07D398B2853FEF2000B9EAE /* LICENSE.txt */,
-				D0410B4A284E0F6B0012E0E3 /* images */,
 				D0429278284D4DD6001B5810 /* README.md */,
+				D0410B4A284E0F6B0012E0E3 /* images */,
 			);
 			path = .github;
 			sourceTree = "<group>";
