@@ -139,5 +139,5 @@ Project Link: [https://github.com/vdhamer/SwiftLeeAggregator](https://github.com
 [issues-shield]: https://img.shields.io/github/issues/vdhamer/SwiftLeeAggregator.svg?style=for-the-badge
 [issues-url]: https://github.com/vdhamer/SwiftLeeAggregator/issues
 [license-shield]: https://img.shields.io/github/license/vdhamer/SwiftLeeAggregator.svg?style=for-the-badge
-[license-url]: https://github.com/vdhamer/SwiftLeeAggregator/blob/master/LICENSE.txt
+[license-url]: https://github.com/vdhamer/SwiftLeeAggregator/.github/LICENSE.txt
 [product-screenshot]: images/screenshot.png
