@@ -76,11 +76,11 @@ The line is commented out because I have a second file containing my own key. Th
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
-There is little to say about usage. Just launch the app, and it will launch all currently available posts on SwiftLee's site.
+When you launch the app, and it will list all currently available posts on SwiftLee's site. The app currently does not store any data on your device, so you will need to be online (otherwise you will see an empty List).
 
-The Search field allows you to filter the shown postings. It only uses the title fields for this - so not the actual body text or tags/keywords attached to the posts.
+The Search field allows you to filter the shown posts. It only searches the title fields - so does not search the actual post text or keywords.
 
-If you click on an post in the scrollable List, it will load the actual post into a browser tab. The app currently does not store any data on your device, so you will need to be online (otherwise you will see an empty List). 
+If you click on an post's entry on the list, it will load the actual post in a browser tab.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
