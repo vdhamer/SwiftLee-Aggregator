@@ -24,6 +24,13 @@ struct PostListView: View {
         VStack {
             NavigationView {
                 List {
+                    HStack {
+                        Spacer()
+                        Text("Showing \(searchResults.count) of \(blogPosts.count) " +
+                             "\(searchResults.count==1 ? "post" : "posts")")
+                            .font(.callout)
+                        Spacer()
+                    }
                     ForEach(searchResults) { blogPost in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
@@ -47,7 +54,8 @@ struct PostListView: View {
                         }
                     }
                 }
-                .searchable(text: $searchText, prompt: "Title search")
+                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always),
+                            prompt: "Title search")
                 .refreshable { }
                 .onAppear {
                     if testString == nil {
@@ -56,8 +64,7 @@ struct PostListView: View {
                         fillBlogPostsFromString(string: testString!)
                     }
                 }
-                .navigationTitle("SwiftLee (\(searchResults.count)/\(blogPosts.count) " +
-                                 "\(blogPosts.count==1 ? "post" : "posts"))") // fancy plural
+                .navigationTitle("SwiftLee")
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
         }
