@@ -9,13 +9,14 @@ import SwiftUI
 
 struct PostListView: View {
 
-    @State var blogPosts: [Post]
+    var testString: String?
+
+    @State var blogPosts = [Post]()
     @State var searchText: String = ""
 
     private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
     private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
 
-    var showSimulatedData = false
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
 
     var body: some View {
@@ -43,24 +44,16 @@ struct PostListView: View {
                                 Text(viewDateFormatter.string(from: blogPost.pubDate))
                                     .font(.footnote)
                             }
-
                         }
                     }
                 }
                 .searchable(text: $searchText, prompt: "Title search")
                 .refreshable { }
                 .onAppear {
-                    if showSimulatedData {
-                        do {
-                            let jsonData = hardcodedJsonString.data(using: .utf8)!
-                            let newBlogPosts = try getDecoder().decode([Post].self, from: jsonData)
-                            blogPosts = newBlogPosts
-                        } catch {
-                            print("Error decoding hardcoded JSON string")
-                            return
-                        }
+                    if testString == nil {
+                        fillBlogPostsFromSite()
                     } else { // fetch online data
-                        loadPosts()
+                        fillBlogPostsFromString(string: testString!)
                     }
                 }
                 .navigationTitle("SwiftLee (\(searchResults.count)/\(blogPosts.count) " +
@@ -98,7 +91,7 @@ struct PostListView: View {
         }
     }
 
-    func loadPosts() {
+    func fillBlogPostsFromSite() {
         Task {
             if blogPosts.isEmpty { // we expect blogPosts[] to be empty
                 var page = 0
@@ -130,6 +123,17 @@ struct PostListView: View {
         }
     }
 
+    func fillBlogPostsFromString(string: String) {
+        do { // fetch offline data
+            let jsonData = string.data(using: .utf8)!
+            let root = try getDecoder().decode(Page.self, from: jsonData)
+            blogPosts = root.postings
+        } catch {
+            print("Error decoding hardcoded JSON string")
+            return
+        }
+    }
+
     func getDecoder() -> JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -139,24 +143,6 @@ struct PostListView: View {
         decoder.dateDecodingStrategy = .formatted(jsonDateFormatter)
         return decoder
     }
-
-    let hardcodedJsonString: String = """
-        [{
-            "title": "Optionals in Swift explained: 5 things you should know",
-            "link": "https://www.avanderlee.com/swift/optionals-in-swift-explained-5-things-you-should-know/",
-            "pubDate": "2001-01-01T09:15:00Z"
-        },
-        {
-            "title": "EXC_BAD_ACCESS crash error: Understanding and solving it",
-            "link": "https://www.avanderlee.com/swift/exc-bad-access-crash/",
-            "pubDate": "2002-02-02T09:15:00Z"
-        },
-        {
-            "title": "Thread Sanitizer explained: Data Races in Swift",
-            "link": "https://www.avanderlee.com/swift/thread-sanitizer-data-races/",
-            "pubDate": "2003-03-03T09:15:00Z"
-        }]
-        """
 
 }
 
@@ -168,14 +154,39 @@ private func makeViewDateFormatter() -> DateFormatter {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            PostListView(blogPosts: [Post(title: "MyTitle",
-                                             pubDate: Date()-365*10,
-                                             url: URL(string: "http://www.example.com")!,
-                                             keywords: ["Swift", "SwiftUI"]
-                                    )],
-                    showSimulatedData: true)
-        }
-        .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
+        PostListView(testString: hardcodedJsonString)
     }
+
+    static let hardcodedJsonString: String = """
+        {
+          "status": "ok",
+          "feed": {
+            "url": "https://www.avanderlee.com/feed",
+            "title": "SwiftLee",
+            "link": "https://www.avanderlee.com/",
+            "author": "",
+            "description": "A weekly blog about Swift, iOS and Xcode Tips and Tricks",
+            "image": ""
+          },
+          "items": [
+            {
+              "title": "App Icon Generator is no longer needed with Xcode 14",
+              "pubDate": "2022-06-07 09:25:22",
+              "link": "https://www.avanderlee.com/xcode/replacing-app-icon-generators/",
+              "guid": "https://www.avanderlee.com/?p=5472",
+              "author": "Antoine van der Lee",
+              "thumbnail": "",
+              "description": "Description goes here",
+              "content": "Content goes here",
+              "enclosure": {},
+              "categories": [
+                "Optimization",
+                "Xcode",
+                "assets",
+                "single-size"
+              ]
+            }
+          ]
+        }
+        """
 }

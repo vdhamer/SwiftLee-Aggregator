@@ -11,7 +11,7 @@ import SwiftUI
 struct SwiftLeeAggregatorApp: App {
     var body: some Scene {
         WindowGroup {
-            PostListView(blogPosts: [Post]()) // start with an empty array
+            PostListView()
         }
     }
 }
