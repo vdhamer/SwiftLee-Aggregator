@@ -10,11 +10,13 @@ import SwiftUI
 struct PostListView: View {
 
     @State var blogPosts: [Post]
+    @State var searchText: String = ""
+
     private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
     private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
+
     var showSimulatedData = false
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
-    @State var searchText: String = ""
 
     var body: some View {
 
@@ -58,35 +60,7 @@ struct PostListView: View {
                             return
                         }
                     } else { // fetch online data
-                        Task {
-                            if blogPosts.isEmpty { // we expect blogPosts[] to be empty
-                                var page = 0
-                                var newPage: [Post] // list of posts on page
-                                var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)
-
-                                repeat { // fetching one page at a time (note: we don't know home many to expect)
-                                    page += 1
-                                    newPage = await fetchJsonData(page: page)
-                                    blogPosts.append(contentsOf: newPage)
-                                    pageSize = max(pageSize, newPage.count) // largest received page
-                                } while newPage.count == pageSize // stop on first empty or partially filled page
-
-                                // reporting
-                                print("""
-                                      Found a total of \(blogPosts.count) posts \
-                                      on \(blogPosts.count/pageSize) pages \
-                                      with \(pageSize) posts each
-                                      """, terminator: "")
-                                if newPage.count==0 {
-                                    print(".") // no partially filled page at end
-                                } else { // partially filled page at end
-                                    let remainder = blogPosts.count % pageSize
-                                    print(", plus a final page containing the last \(remainder) posts.")
-                                }
-                            } else {
-                                print("Warning: we almost filled the blogPosts array a second time. Check why!")
-                            }
-                        }
+                        loadPosts()
                     }
                 }
                 .navigationTitle("SwiftLee (\(searchResults.count)/\(blogPosts.count) " +
@@ -121,6 +95,38 @@ struct PostListView: View {
         } catch {
             print("Decoding of page failed.") // can happen if page number is too high
             return [Post]()
+        }
+    }
+
+    func loadPosts() {
+        Task {
+            if blogPosts.isEmpty { // we expect blogPosts[] to be empty
+                var page = 0
+                var newPage: [Post] // list of posts on page
+                var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)
+
+                repeat { // fetching one page at a time (note: we don't know home many to expect)
+                    page += 1
+                    newPage = await fetchJsonData(page: page)
+                    blogPosts.append(contentsOf: newPage)
+                    pageSize = max(pageSize, newPage.count) // largest received page
+                } while newPage.count == pageSize // stop on first empty or partially filled page
+
+                // reporting
+                print("""
+                      Found a total of \(blogPosts.count) posts \
+                      on \(blogPosts.count/pageSize) pages \
+                      with \(pageSize) posts each
+                      """, terminator: "")
+                if newPage.count==0 {
+                    print(".") // no partially filled page at end
+                } else { // partially filled page at end
+                    let remainder = blogPosts.count % pageSize
+                    print(", plus a final page containing the last \(remainder) posts.")
+                }
+            } else {
+                print("Warning: we almost filled the blogPosts array a second time. Check why!")
+            }
         }
     }
 
