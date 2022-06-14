@@ -28,16 +28,7 @@ struct PostListView: View {
         VStack {
             NavigationView {
                 List {
-                    if UIDevice.isIPhone && isSearching {
-                        HStack {
-                            Spacer()
-                            Text("Showing \(searchResults.count) of \(blogPosts.count) " +
-                                 "\(searchResults.count==1 ? "post" : "posts")")
-                                .font(.callout)
-                                .foregroundColor(isSearching ? .green : .red)
-                           Spacer()
-                        }
-                    }
+                    Stats(searchResultsCount: searchResults.count, blogPostsCount: blogPosts.count)
                     ForEach(searchResults) { blogPost in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
@@ -81,6 +72,29 @@ struct PostListView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
         }
+    }
+
+    struct Stats: View {
+        @Environment(\.isSearching) private var isSearching
+        let searchResultsCount: Int
+        let blogPostsCount: Int
+
+        // https://www.reddit.com/r/SwiftUI/comments/trtw8r/searchable_environment_var_dismisssearch_and/
+        var body: some View {
+                if UIDevice.isIPhone && isSearching {
+                    HStack {
+                        Spacer()
+                        Text("Showing \(searchResultsCount) of \(blogPostsCount) " +
+                             "\(searchResultsCount==1 ? "post" : "posts")")
+                            .font(.callout)
+                        Spacer()
+                    }
+                    .foregroundColor(.gray)
+                } else {
+                    EmptyView()
+                }
+        }
+
     }
 
     var searchResults: [Post] { // helper function to support .searchable() view modifier
