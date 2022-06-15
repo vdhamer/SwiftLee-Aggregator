@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D0429279284D4DD6001B5810 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0429278284D4DD6001B5810 /* README.md */; };
 		D07D398C2853FEF2000B9EAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D07D398B2853FEF2000B9EAE /* LICENSE.txt */; };
+		D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */; };
 		D0D333D5285558640074D32C /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D333D4285558640074D32C /* screenshot.png */; };
 		D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */; };
 		D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0E698F4284BF679003D6AB8 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		D0429278284D4DD6001B5810 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D07D398B2853FEF2000B9EAE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+IsIPad.swift"; sourceTree = "<group>"; };
 		D0D333D4285558640074D32C /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		D0E698D2284BD2FB003D6AB8 /* SwiftLeeAggregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLeeAggregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLeeAggregatorApp.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		D0E698F7284BF679003D6AB8 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */,
 				D0E698F8284BF679003D6AB8 /* ApiKey_.swift */,
 				D0E69916284C1058003D6AB8 /* ApiKey.swift */,
 			);
@@ -180,6 +183,7 @@
 			knownRegions = (
 				en,
 				Base,
+				nl,
 			);
 			mainGroup = D0E698C9284BD2FB003D6AB8;
 			productRefGroup = D0E698D3284BD2FB003D6AB8 /* Products */;
@@ -235,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */,
 				D0E6990A284BF679003D6AB8 /* PostListView.swift in Sources */,
 				D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
 				D0E69908284BF679003D6AB8 /* Post.swift in Sources */,

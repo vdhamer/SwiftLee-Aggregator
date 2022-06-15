@@ -13,24 +13,22 @@ struct PostListView: View {
 
     @State var blogPosts = [Post]()
     @State var searchText: String = ""
+    @Environment(\.isSearching) private var isSearching
 
     private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
     private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
 
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
+    private let toolbarItemPlacement: ToolbarItemPlacement = UIDevice.isIPad ?
+                                                                .destructiveAction : // iPad: Search field in toolbar
+                                                                .navigationBarTrailing // iPhone: Search field in drawer
 
     var body: some View {
 
         VStack {
             NavigationView {
                 List {
-                    HStack {
-                        Spacer()
-                        Text("Showing \(searchResults.count) of \(blogPosts.count) " +
-                             "\(searchResults.count==1 ? "post" : "posts")")
-                            .font(.callout)
-                        Spacer()
-                    }
+                    Stats(searchResultsCount: searchResults.count, blogPostsCount: blogPosts.count)
                     ForEach(searchResults) { blogPost in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
@@ -54,8 +52,14 @@ struct PostListView: View {
                         }
                     }
                 }
-                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always),
-                            prompt: "Title search")
+                .searchable(text: $searchText, placement: .toolbar, prompt: "Title search")
+                .toolbar {
+                    ToolbarItemGroup(placement: toolbarItemPlacement) {
+                        Text("(\(searchResults.count) of \(blogPosts.count))")
+                            .foregroundColor(.gray)
+                            .font(.callout)
+                    }
+                }
                 .refreshable { }
                 .onAppear {
                     if testString == nil {
@@ -68,6 +72,29 @@ struct PostListView: View {
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
         }
+    }
+
+    struct Stats: View {
+        @Environment(\.isSearching) private var isSearching
+        let searchResultsCount: Int
+        let blogPostsCount: Int
+
+        // https://www.reddit.com/r/SwiftUI/comments/trtw8r/searchable_environment_var_dismisssearch_and/
+        var body: some View {
+                if UIDevice.isIPhone && isSearching {
+                    HStack {
+                        Spacer()
+                        Text("Showing \(searchResultsCount) of \(blogPostsCount) " +
+                             "\(searchResultsCount==1 ? "post" : "posts")")
+                            .font(.callout)
+                        Spacer()
+                    }
+                    .foregroundColor(.gray)
+                } else {
+                    EmptyView()
+                }
+        }
+
     }
 
     var searchResults: [Post] { // helper function to support .searchable() view modifier
