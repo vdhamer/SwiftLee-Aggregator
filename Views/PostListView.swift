@@ -87,6 +87,7 @@ struct PostListView: View {
                         Text("Showing \(searchResultsCount) of \(blogPostsCount) " +
                              "\(searchResultsCount==1 ? "post" : "posts")")
                             .font(.callout)
+                            .foregroundColor(.teal)
                         Spacer()
                     }
                     .foregroundColor(.gray)
