@@ -31,7 +31,7 @@ struct WrappedPosting: Decodable, Identifiable {
     var imageURL: URL? { URL(string: _imageUrlString) }
 }
 
-struct Post: Decodable, Identifiable {
+struct Post: Decodable, Identifiable, Equatable {
 
     enum CodingKeys: String, CodingKey, Hashable {
         case title

@@ -68,6 +68,7 @@ struct PostListView: View {
                         fillBlogPostsFromString(string: testString!)
                     }
                 }
+                .animation(.spring(), value: searchText) // non-default animations don't work?
                 .navigationTitle("SwiftLee")
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
@@ -95,7 +96,6 @@ struct PostListView: View {
                     EmptyView()
                 }
         }
-
     }
 
     var searchResults: [Post] { // helper function to support .searchable() view modifier
