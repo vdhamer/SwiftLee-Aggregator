@@ -16,10 +16,11 @@ struct Page: Decodable, Identifiable {
     }
 
     let status: String
-    let feed: WrappedPosting
+    let feed: Feed
     let postings: [Post]
 
-    var id: URL {
-        feed.url
+    var id: String {
+//        feed.title // TODO:
+        UUID().uuidString
     }
 }

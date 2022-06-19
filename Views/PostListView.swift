@@ -35,18 +35,18 @@ struct PostListView: View {
                                 .padding(.top, 4.5)
                                 .foregroundColor(.brown)
                             VStack(alignment: .leading) {
-                                Link(destination: blogPost.url, label: {
+                                Link(destination: URL(fileURLWithPath: blogPost.url), label: {
                                     Text(blogPost.title)
                                         .font(.title3)
                                         .lineLimit(2)
                                         .truncationMode(.middle)
                                         .foregroundColor(.accentColor)
                                 })
-                                Text(blogPost.url.absoluteString)
+                                Text(blogPost.url/*.absoluteString*/)
                                     .lineLimit(1)
                                     .truncationMode(.head)
                                     .foregroundColor(.gray)
-                                Text(viewDateFormatter.string(from: blogPost.pubDate))
+                                Text(viewDateFormatter.string(from: blogPost.publicationDate))
                                     .font(.footnote)
                             }
                         }
@@ -164,7 +164,7 @@ struct PostListView: View {
             let root = try getDecoder().decode(Page.self, from: jsonData)
             blogPosts = root.postings
         } catch {
-            print("Error decoding hardcoded JSON string")
+            print("Error decoding hardcoded JSON string: \"\(error)\"")
             return
         }
     }

@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D023E94A285E329200532076 /* SwiftLeeAggregator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D023E948285E329200532076 /* SwiftLeeAggregator.xcdatamodeld */; };
+		D023E94D285E836900532076 /* CodingUserInfoKey+MoC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */; };
 		D0429279284D4DD6001B5810 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0429278284D4DD6001B5810 /* README.md */; };
+		D0572323285FCF3100190990 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0572322285FCF3100190990 /* Feed.swift */; };
 		D07D398C2853FEF2000B9EAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D07D398B2853FEF2000B9EAE /* LICENSE.txt */; };
+		D0C4F800285F31E2001251DA /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4F7FF285F31E2001251DA /* PersistenceController.swift */; };
 		D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */; };
 		D0D333D5285558640074D32C /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D333D4285558640074D32C /* screenshot.png */; };
 		D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */; };
@@ -25,8 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D023E949285E329200532076 /* Model_1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_1.xcdatamodel; sourceTree = "<group>"; };
+		D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+MoC.swift"; sourceTree = "<group>"; };
 		D0429278284D4DD6001B5810 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D0572322285FCF3100190990 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		D07D398B2853FEF2000B9EAE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		D0C4F7FF285F31E2001251DA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+IsIPad.swift"; sourceTree = "<group>"; };
 		D0D333D4285558640074D32C /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		D0E698D2284BD2FB003D6AB8 /* SwiftLeeAggregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLeeAggregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +62,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D023E94B285E35F200532076 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D0E698FA284BF679003D6AB8 /* Post.swift */,
+				D0572322285FCF3100190990 /* Feed.swift */,
+				D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		D0410B4A284E0F6B0012E0E3 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +102,7 @@
 				D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */,
 				D0E698F4284BF679003D6AB8 /* Assets.xcassets */,
 				D0E698FC284BF679003D6AB8 /* Views */,
+				D023E94B285E35F200532076 /* ViewModel */,
 				D0E698F9284BF679003D6AB8 /* Model */,
 				D0E698F7284BF679003D6AB8 /* Utilities */,
 				D0E698F5284BF679003D6AB8 /* Preview Content */,
@@ -109,6 +128,7 @@
 				D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */,
 				D0E698F8284BF679003D6AB8 /* ApiKey_.swift */,
 				D0E69916284C1058003D6AB8 /* ApiKey.swift */,
+				D0C4F7FF285F31E2001251DA /* PersistenceController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -116,8 +136,8 @@
 		D0E698F9284BF679003D6AB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0E698FA284BF679003D6AB8 /* Post.swift */,
 				D0E698FB284BF679003D6AB8 /* Page.swift */,
+				D023E948285E329200532076 /* SwiftLeeAggregator.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -240,12 +260,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */,
+				D023E94D285E836900532076 /* CodingUserInfoKey+MoC.swift in Sources */,
 				D0E6990A284BF679003D6AB8 /* PostListView.swift in Sources */,
 				D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
 				D0E69908284BF679003D6AB8 /* Post.swift in Sources */,
 				D0E69909284BF679003D6AB8 /* Page.swift in Sources */,
+				D023E94A285E329200532076 /* SwiftLeeAggregator.xcdatamodeld in Sources */,
 				D0E69917284C1058003D6AB8 /* ApiKey.swift in Sources */,
+				D0572323285FCF3100190990 /* Feed.swift in Sources */,
 				D0E69907284BF679003D6AB8 /* ApiKey_.swift in Sources */,
+				D0C4F800285F31E2001251DA /* PersistenceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +493,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D023E948285E329200532076 /* SwiftLeeAggregator.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D023E949285E329200532076 /* Model_1.xcdatamodel */,
+			);
+			currentVersion = D023E949285E329200532076 /* Model_1.xcdatamodel */;
+			path = SwiftLeeAggregator.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D0E698CA284BD2FB003D6AB8 /* Project object */;
 }
