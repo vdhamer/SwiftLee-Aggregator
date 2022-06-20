@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct SwiftLeeAggregatorApp: App {
+    // https://www.hackingwithswift.com/quick-start/swiftui/how-to-configure-core-data-to-work-with-swiftui
+
+    @Environment(\.scenePhase) var scenePhase
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
-            PostListView()
+            PostListView(/*testString: ContentView_Previews.hardcodedJsonString*/)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
+        .onChange(of: scenePhase) { _ in
+            persistenceController.save() // when app moves to background
         }
     }
 }
