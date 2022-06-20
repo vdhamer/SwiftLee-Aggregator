@@ -16,10 +16,7 @@ struct SwiftLeeAggregatorApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            PostListView(testString: ContentView_Previews.hardcodedJsonString) // TODO: temp!!
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-
-            PostListView()
+            PostListView(/*testString: ContentView_Previews.hardcodedJsonString*/)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in

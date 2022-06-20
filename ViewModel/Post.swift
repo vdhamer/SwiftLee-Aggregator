@@ -28,7 +28,6 @@ class Post: NSManagedObject, Decodable {
         self.init(context: PersistenceController.shared.container.viewContext)
 
         let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.id = try container.decode(Int64.self, forKey: .id) // TODO: needed?
         self.title = try container.decode(String.self, forKey: .title)
         self.publicationDate = try container.decode(Date.self, forKey: .publicationDate)
         self.url = try container.decode(String.self, forKey: .url)
@@ -124,7 +123,7 @@ class Post: NSManagedObject, Decodable {
             if let url = url_ {
                 return url
             } else {
-                fatalError("Error because stored URL is nil") // TODO: String instead of URL
+                fatalError("Error because stored URL is nil")
             }
         }
         set {

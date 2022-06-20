@@ -10,9 +10,9 @@ import CoreData
 class Feed: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey, Hashable { // in same order as JSON file
-//        case url
+//        case url // TODO:
         case title
-//        case urlBase = "link"
+        case urlBase = "link"
 //        case author
 //        case summary = "description"
 //        case imageURL = "image"
@@ -20,7 +20,7 @@ class Feed: NSManagedObject, Decodable {
 
 //    var url: String = ""
     var title: String = ""
-//    var urlBase: String = ""
+    var urlBase: String = ""
 //    var author: String = ""
 //    var summary: String = ""
 //    var imageURL: String = "" // var imageURL: URL? { URL(string: imageUrlString) }
@@ -34,7 +34,7 @@ class Feed: NSManagedObject, Decodable {
 //        self.id = try container.decode(Int64.self, forKey: .id)
 //        self.url = try container.decode(String.self, forKey: .url)
         self.title = try container.decode(String.self, forKey: .title)
-//        self.urlBase = try container.decode(String.self, forKey: .urlBase)
+        self.urlBase = try container.decode(String.self, forKey: .urlBase)
 //        self.author = try container.decode(String.self, forKey: .author)
 //        self.summary = try container.decode(String.self, forKey: .summary)
 //        self.urlBase = try container.decode(String.self, forKey: .urlBase)

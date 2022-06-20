@@ -14,6 +14,7 @@ struct PostListView: View {
     @State var blogPosts = [Post]()
     @State var searchText: String = ""
     @Environment(\.isSearching) private var isSearching
+    @Environment(\.managedObjectContext) var context
 
     private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
     private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
@@ -35,7 +36,8 @@ struct PostListView: View {
                                 .padding(.top, 4.5)
                                 .foregroundColor(.brown)
                             VStack(alignment: .leading) {
-                                Link(destination: URL(fileURLWithPath: blogPost.url), label: {
+                                Link(destination: URL(string: blogPost.url) ??
+                                                  URL(string: "http:www.example.com")!, label: {
                                     Text(blogPost.title)
                                         .font(.title3)
                                         .lineLimit(2)
@@ -137,6 +139,7 @@ struct PostListView: View {
                     page += 1
                     newPage = await fetchJsonData(page: page)
                     blogPosts.append(contentsOf: newPage)
+                    try context.save()
                     pageSize = max(pageSize, newPage.count) // largest received page
                 } while newPage.count == pageSize // stop on first empty or partially filled page
 
@@ -163,6 +166,7 @@ struct PostListView: View {
             let jsonData = string.data(using: .utf8)!
             let root = try getDecoder().decode(Page.self, from: jsonData)
             blogPosts = root.postings
+            try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
             return
@@ -205,23 +209,40 @@ struct ContentView_Previews: PreviewProvider {
           },
           "items": [
             {
-              "title": "App Icon Generator is no longer needed with Xcode 14",
-              "pubDate": "2022-06-07 09:25:22",
-              "link": "https://www.avanderlee.com/xcode/replacing-app-icon-generators/",
-              "guid": "https://www.avanderlee.com/?p=5472",
+              "title": "The start of a new blog",
+              "pubDate": "2015-05-02 12:52:51",
+              "link": "https://www.avanderlee.com/swift/the-start-of-a-new-blog/",
+              "guid": "http://www.avanderlee.com/?p=9",
               "author": "Antoine van der Lee",
               "thumbnail": "",
-              "description": "Description goes here",
-              "content": "Content goes here",
+              "description": "\(description)",
+              "content": "\(content)",
               "enclosure": {},
               "categories": [
-                "Optimization",
-                "Xcode",
-                "assets",
-                "single-size"
+                "Swift"
               ]
             }
           ]
         }
         """
+
+    static let description: String = """
+      <p>Hi there! After thinking a lot of starting my own blog, \
+      I\u{2019}ve finally made the decision to create one!\\n\
+      As iOS developer for my job I found myself experiencing a lot of problems, \
+      writing solutions and figuring out what\u{2019}s the best way to create this UI. \
+      Many times these are things to share with others, but until today I didn't had a place for that.\\n\
+      Expect posts about iOS related topics, posts about my WWDC visit coming June \
+      and libraries I\u{2019}ve settled up for iOS.
+    """
+
+    static let content: String = """
+      <p>Hi there! After thinking a lot of starting my own blog, \
+      I\u{2019}ve finally made the decision to create one!\\n\
+      As iOS developer for my job I found myself experiencing a lot of problems, \
+      writing solutions and figuring out what\u{2019}s the best way to create this UI. \
+      Many times these are things to share with others, but until today I didn't had a place for that.\\n\
+      Expect posts about iOS related topics, posts about my WWDC visit coming June \
+      and libraries I\u{2019}ve settled up for iOS.
+    """
 }

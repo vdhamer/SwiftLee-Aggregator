@@ -20,7 +20,6 @@ struct Page: Decodable, Identifiable {
     let postings: [Post]
 
     var id: String {
-//        feed.title // TODO:
-        UUID().uuidString
+        feed.urlBase
     }
 }

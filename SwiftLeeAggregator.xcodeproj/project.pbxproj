@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D023E94A285E329200532076 /* SwiftLeeAggregator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D023E948285E329200532076 /* SwiftLeeAggregator.xcdatamodeld */; };
-		D023E94D285E836900532076 /* CodingUserInfoKey+MoC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */; };
 		D0429279284D4DD6001B5810 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0429278284D4DD6001B5810 /* README.md */; };
 		D0572323285FCF3100190990 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0572322285FCF3100190990 /* Feed.swift */; };
 		D07D398C2853FEF2000B9EAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D07D398B2853FEF2000B9EAE /* LICENSE.txt */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		D023E949285E329200532076 /* Model_1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_1.xcdatamodel; sourceTree = "<group>"; };
-		D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+MoC.swift"; sourceTree = "<group>"; };
 		D0429278284D4DD6001B5810 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0572322285FCF3100190990 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		D07D398B2853FEF2000B9EAE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -67,7 +65,6 @@
 			children = (
 				D0E698FA284BF679003D6AB8 /* Post.swift */,
 				D0572322285FCF3100190990 /* Feed.swift */,
-				D023E94C285E836900532076 /* CodingUserInfoKey+MoC.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */,
-				D023E94D285E836900532076 /* CodingUserInfoKey+MoC.swift in Sources */,
 				D0E6990A284BF679003D6AB8 /* PostListView.swift in Sources */,
 				D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */,
 				D0E69908284BF679003D6AB8 /* Post.swift in Sources */,
