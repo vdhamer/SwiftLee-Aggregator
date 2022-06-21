@@ -11,7 +11,7 @@ struct PostListView: View {
 
     var testString: String?
 
-    @State var blogPosts = [Post]()
+    @State var blogPosts = [Post]() // TODO
     @State var searchText: String = ""
     @Environment(\.isSearching) private var isSearching
     @Environment(\.managedObjectContext) var context
@@ -62,13 +62,11 @@ struct PostListView: View {
                             .font(.callout)
                     }
                 }
-                .refreshable { }
                 .onAppear {
-                    if testString == nil {
-                        fillBlogPostsFromSite()
-                    } else { // fetch online data
-                        fillBlogPostsFromString(string: testString!)
-                    }
+                    fillBlogPosts()
+                }
+                .refreshable {
+//                    fillBlogPosts() // TODO
                 }
                 .animation(.spring(), value: searchText) // non-default animations don't work?
                 .navigationTitle("SwiftLee")
@@ -128,35 +126,40 @@ struct PostListView: View {
         }
     }
 
-    func fillBlogPostsFromSite() {
+    func fillBlogPosts() {
+        if testString == nil {
+            fillBlogPostsFromServer()
+        } else { // fetch online data
+            fillBlogPostsFromString(string: testString!)
+        }
+    }
+
+    func fillBlogPostsFromServer() {
         Task {
-            if blogPosts.isEmpty { // we expect blogPosts[] to be empty
-                var page = 0
-                var newPage: [Post] // list of posts on page
-                var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)
+            print("fillBlogPostsFromServer()")
+            var page = 0
+            var newPage: [Post] // list of posts on page
+            var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)
 
-                repeat { // fetching one page at a time (note: we don't know home many to expect)
-                    page += 1
-                    newPage = await fetchJsonData(page: page)
-                    blogPosts.append(contentsOf: newPage)
-                    try context.save()
-                    pageSize = max(pageSize, newPage.count) // largest received page
-                } while newPage.count == pageSize // stop on first empty or partially filled page
+            repeat { // fetching one page at a time (note: we don't know home many to expect)
+                page += 1
+                newPage = await fetchJsonData(page: page)
+                blogPosts.append(contentsOf: newPage)
+                try context.save()
+                pageSize = max(pageSize, newPage.count) // largest received page
+            } while newPage.count == pageSize // stop on first empty or partially filled page TODO
 
-                // reporting
-                print("""
-                      Found a total of \(blogPosts.count) posts \
-                      on \(blogPosts.count/pageSize) pages \
-                      with \(pageSize) posts each
-                      """, terminator: "")
-                if newPage.count==0 {
-                    print(".") // no partially filled page at end
-                } else { // partially filled page at end
-                    let remainder = blogPosts.count % pageSize
-                    print(", plus a final page containing the last \(remainder) posts.")
-                }
-            } else {
-                print("Warning: we almost filled the blogPosts array a second time. Check why!")
+            // reporting
+            print("""
+                  Found a total of \(blogPosts.count) posts \
+                  on \(blogPosts.count/pageSize) pages \
+                  with \(pageSize) posts each
+                  """, terminator: "")
+            if newPage.count==0 {
+                print(".") // no partially filled page at end
+            } else { // partially filled page at end
+                let remainder = blogPosts.count % pageSize
+                print(", plus a final page containing the last \(remainder) posts.")
             }
         }
     }
@@ -165,7 +168,7 @@ struct PostListView: View {
         do { // fetch offline data
             let jsonData = string.data(using: .utf8)!
             let root = try getDecoder().decode(Page.self, from: jsonData)
-            blogPosts = root.postings
+            blogPosts.append(contentsOf: root.postings)
             try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
@@ -191,7 +194,7 @@ private func makeViewDateFormatter() -> DateFormatter {
     return formatter
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct PostListView_Previews: PreviewProvider {
     static var previews: some View {
         PostListView(testString: hardcodedJsonString)
     }
