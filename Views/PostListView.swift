@@ -11,7 +11,8 @@ struct PostListView: View {
 
     var testString: String?
 
-    @State var blogPosts = [Post]() // TODO
+//    @State var blogPosts = [Post]() // TODO was used when there was no CoreData
+    @FetchRequest var postFetchRequest: FetchedResults<Post>
     @State var searchText: String = ""
     @Environment(\.isSearching) private var isSearching
     @Environment(\.managedObjectContext) var context
@@ -24,13 +25,22 @@ struct PostListView: View {
                                                                 .destructiveAction : // iPad: Search field in toolbar
                                                                 .navigationBarTrailing // iPhone: Search field in drawer
 
+    init(testString: String?, predicate: NSPredicate, searchText: Binding<String>) {
+        self.testString = testString
+        _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
+//                                                SortDescriptor(\.publicationDate, order: .reverse) // TODO
+                                            ],
+                                             predicate: predicate,
+                                             animation: .default)
+    }
+
     var body: some View {
 
         VStack {
             NavigationView {
                 List {
-                    Stats(searchResultsCount: searchResults.count, blogPostsCount: blogPosts.count)
-                    ForEach(searchResults) { blogPost in
+                    Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
+                    ForEach(filteredPostQueryResults) { blogPost in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
                                 .padding(.top, 4.5)
@@ -57,7 +67,7 @@ struct PostListView: View {
                 .searchable(text: $searchText, placement: .toolbar, prompt: "Title search")
                 .toolbar {
                     ToolbarItemGroup(placement: toolbarItemPlacement) {
-                        Text("(\(searchResults.count) of \(blogPosts.count))")
+                        Text("(\(filteredPostQueryResults.count) of \(postFetchRequest.count))")
                             .foregroundColor(.gray)
                             .font(.callout)
                     }
@@ -98,11 +108,15 @@ struct PostListView: View {
         }
     }
 
-    var searchResults: [Post] { // helper function to support .searchable() view modifier
+    var filteredPostQueryResults: [Post] { // helper function to support .searchable() view modifier
         if searchText.isEmpty {
-            return blogPosts // no filtering
+            return postFetchRequest.filter { _ in // no filtering
+                true
+            }
         } else {
-            return blogPosts.filter { $0.title.lowercased().contains(searchText.lowercased()) } // case insensitive
+            return postFetchRequest.filter {
+                $0.title.lowercased().contains(searchText.lowercased()) // case insensitive
+            }
         }
     }
 
@@ -144,21 +158,25 @@ struct PostListView: View {
             repeat { // fetching one page at a time (note: we don't know home many to expect)
                 page += 1
                 newPage = await fetchJsonData(page: page)
-                blogPosts.append(contentsOf: newPage)
+                for post in newPage {
+                    // TODO add to database
+                    print("\(post.publicationDate)")
+                }
+//                blogPosts.append(contentsOf: newPage)
                 try context.save()
                 pageSize = max(pageSize, newPage.count) // largest received page
             } while newPage.count == pageSize // stop on first empty or partially filled page TODO
 
             // reporting
             print("""
-                  Found a total of \(blogPosts.count) posts \
-                  on \(blogPosts.count/pageSize) pages \
+                  Found a total of \(postFetchRequest.count) posts \
+                  on \(postFetchRequest.count/pageSize) pages \
                   with \(pageSize) posts each
                   """, terminator: "")
             if newPage.count==0 {
                 print(".") // no partially filled page at end
             } else { // partially filled page at end
-                let remainder = blogPosts.count % pageSize
+                let remainder = postFetchRequest.count % pageSize
                 print(", plus a final page containing the last \(remainder) posts.")
             }
         }
@@ -168,7 +186,11 @@ struct PostListView: View {
         do { // fetch offline data
             let jsonData = string.data(using: .utf8)!
             let root = try getDecoder().decode(Page.self, from: jsonData)
-            blogPosts.append(contentsOf: root.postings)
+            for post in root.postings {
+                // TODO add to database
+                print("\(post.publicationDate)")
+            }
+//            blogPosts.append(contentsOf: root.postings)
             try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
@@ -195,8 +217,11 @@ private func makeViewDateFormatter() -> DateFormatter {
 }
 
 struct PostListView_Previews: PreviewProvider {
+    @State static var searchText = ""
     static var previews: some View {
-        PostListView(testString: hardcodedJsonString)
+        PostListView(testString: hardcodedJsonString,
+                     predicate: NSPredicate(format: "TRUEPREDICATE"), // TODO .all should work
+                     searchText: $searchText)
     }
 
     static let hardcodedJsonString: String = """

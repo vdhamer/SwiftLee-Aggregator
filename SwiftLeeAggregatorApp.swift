@@ -13,10 +13,13 @@ struct SwiftLeeAggregatorApp: App {
 
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
+    @State var searchText: String = ""
 
     var body: some Scene {
         WindowGroup {
-            PostListView(/*testString: PostListView_Previews.hardcodedJsonString*/)
+            PostListView(testString: nil /*PostListView_Previews.hardcodedJsonString*/,
+                         predicate: NSPredicate(format: "TRUEPREDICATE"), // TODO
+                         searchText: $searchText)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in
