@@ -11,7 +11,7 @@ struct PostListView: View {
 
     var testString: String?
 
-    @State var blogPosts = [Post]() // TODO
+    @FetchRequest var postFetchRequest: FetchedResults<Post>
     @State var searchText: String = ""
     @Environment(\.isSearching) private var isSearching
     @Environment(\.managedObjectContext) var context
@@ -24,31 +24,45 @@ struct PostListView: View {
                                                                 .destructiveAction : // iPad: Search field in toolbar
                                                                 .navigationBarTrailing // iPhone: Search field in drawer
 
+    init(testString: String?, predicate: NSPredicate, searchText: Binding<String>) {
+        self.testString = testString
+
+        _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
+                                                SortDescriptor(\.publicationDate_, order: .reverse)
+                                            ],
+                                             predicate: predicate,
+                                             animation: .default)
+    }
+
     var body: some View {
 
         VStack {
             NavigationView {
                 List {
-                    Stats(searchResultsCount: searchResults.count, blogPostsCount: blogPosts.count)
-                    ForEach(searchResults) { blogPost in
+                    Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
+                    ForEach(filteredPostQueryResults) { post in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
                                 .padding(.top, 4.5)
                                 .foregroundColor(.brown)
                             VStack(alignment: .leading) {
-                                Link(destination: URL(string: blogPost.url) ??
+                                Link(destination: URL(string: post.url) ??
                                                   URL(string: "http:www.example.com")!, label: {
-                                    Text(blogPost.title)
+                                    Text(post.title)
                                         .font(.title3)
                                         .lineLimit(2)
                                         .truncationMode(.middle)
                                         .foregroundColor(.accentColor)
                                 })
-                                Text(blogPost.url/*.absoluteString*/)
+                                Text(post.url)
                                     .lineLimit(1)
                                     .truncationMode(.head)
                                     .foregroundColor(.gray)
-                                Text(viewDateFormatter.string(from: blogPost.publicationDate))
+                                Text(post.shortURL)
+                                    .lineLimit(1)
+                                    .truncationMode(.head)
+                                    .foregroundColor(.gray)
+                                Text(viewDateFormatter.string(from: post.publicationDate))
                                     .font(.footnote)
                             }
                         }
@@ -57,7 +71,7 @@ struct PostListView: View {
                 .searchable(text: $searchText, placement: .toolbar, prompt: "Title search")
                 .toolbar {
                     ToolbarItemGroup(placement: toolbarItemPlacement) {
-                        Text("(\(searchResults.count) of \(blogPosts.count))")
+                        Text("(\(filteredPostQueryResults.count) of \(postFetchRequest.count))")
                             .foregroundColor(.gray)
                             .font(.callout)
                     }
@@ -66,7 +80,7 @@ struct PostListView: View {
                     fillBlogPosts()
                 }
                 .refreshable {
-//                    fillBlogPosts() // TODO
+                    fillBlogPosts()
                 }
                 .animation(.spring(), value: searchText) // non-default animations don't work?
                 .navigationTitle("SwiftLee")
@@ -98,16 +112,20 @@ struct PostListView: View {
         }
     }
 
-    var searchResults: [Post] { // helper function to support .searchable() view modifier
+    var filteredPostQueryResults: [Post] { // helper function to support .searchable() view modifier
         if searchText.isEmpty {
-            return blogPosts // no filtering
+            return postFetchRequest.filter { _ in // no filtering
+                true
+            }
         } else {
-            return blogPosts.filter { $0.title.lowercased().contains(searchText.lowercased()) } // case insensitive
+            return postFetchRequest.filter {
+                $0.title.lowercased().contains(searchText.lowercased()) // case insensitive
+            }
         }
     }
 
     func fetchJsonData(page: Int) async -> [Post] {
-        guard page > 0 else { fatalError("page value must be positive (but is \(page)") } // a bit paranoid, I guess
+        guard page > 0 else { fatalError("page value must be positive (but is \(page)") } // maybe a bit paranoid
 
         let url = URL(string: swiftLeeFeed2Url+"\(page)&api_key=\(apiKey)")!
         let decoder = getDecoder()
@@ -127,7 +145,7 @@ struct PostListView: View {
     }
 
     func fillBlogPosts() {
-        if testString == nil {
+        if testString == nil || testString == "" {
             fillBlogPostsFromServer()
         } else { // fetch online data
             fillBlogPostsFromString(string: testString!)
@@ -144,31 +162,17 @@ struct PostListView: View {
             repeat { // fetching one page at a time (note: we don't know home many to expect)
                 page += 1
                 newPage = await fetchJsonData(page: page)
-                blogPosts.append(contentsOf: newPage)
                 try context.save()
+                print("Page \(page) has \(newPage.count) postings")
                 pageSize = max(pageSize, newPage.count) // largest received page
-            } while newPage.count == pageSize // stop on first empty or partially filled page TODO
-
-            // reporting
-            print("""
-                  Found a total of \(blogPosts.count) posts \
-                  on \(blogPosts.count/pageSize) pages \
-                  with \(pageSize) posts each
-                  """, terminator: "")
-            if newPage.count==0 {
-                print(".") // no partially filled page at end
-            } else { // partially filled page at end
-                let remainder = blogPosts.count % pageSize
-                print(", plus a final page containing the last \(remainder) posts.")
-            }
+            } while newPage.count == pageSize // stop on first empty or partially filled page
         }
     }
 
     func fillBlogPostsFromString(string: String) {
         do { // fetch offline data
             let jsonData = string.data(using: .utf8)!
-            let root = try getDecoder().decode(Page.self, from: jsonData)
-            blogPosts.append(contentsOf: root.postings)
+            _ = try getDecoder().decode(Page.self, from: jsonData)
             try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
@@ -195,8 +199,11 @@ private func makeViewDateFormatter() -> DateFormatter {
 }
 
 struct PostListView_Previews: PreviewProvider {
+    @State static var searchText = ""
     static var previews: some View {
-        PostListView(testString: hardcodedJsonString)
+        PostListView(testString: hardcodedJsonString,
+                     predicate: NSPredicate.all,
+                     searchText: $searchText)
     }
 
     static let hardcodedJsonString: String = """

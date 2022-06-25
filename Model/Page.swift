@@ -16,10 +16,10 @@ struct Page: Decodable, Identifiable {
     }
 
     let status: String
-    let feed: Feed
+    let feed: FeedDescriptor
     let postings: [Post]
 
     var id: String {
-        feed.urlBase
+        feed.title
     }
 }
