@@ -25,6 +25,8 @@ class Post: NSManagedObject, Decodable {
     }
 
     required convenience init(from decoder: Decoder) throws {
+        // this init() allows the Decoder to pump Posts directly into the database
+        // we actually don't want to do this because we want to merge the decoded Posts with the database context
 
         self.init(context: PersistenceController.shared.container.viewContext)
 
@@ -39,8 +41,11 @@ class Post: NSManagedObject, Decodable {
         self.synopsis = try container.decode(String.self, forKey: .synopsis)
         // missing content
         // missing enclosure
-        // missing catagories
+        // missing categories
     }
+}
+
+extension Post {
 
     var title: String {
         get {
@@ -141,7 +146,7 @@ extension Post { // findCreateUpdate() records in Post table
     // Update existing attributes or fill the new object
     // swiftlint:disable:next function_parameter_count
     static func findCreateUpdate(context: NSManagedObjectContext,
-                                 // identifying attributes TODO may not be the best identifier
+                                 // identifying attributes
                                  title: String,
                                   // other attributes of a Post
                                  publicationDate: Date, url: String, shortURL: String,

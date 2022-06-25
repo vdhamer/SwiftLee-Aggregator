@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G624" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Feed" representedClassName=".Feed" syncable="YES" codeGenerationType="category"/>
+    <entity name="FeedDescriptor" representedClassName=".FeedDescriptor" syncable="YES" codeGenerationType="category"/>
     <entity name="Post" representedClassName=".Post" syncable="YES" codeGenerationType="category">
         <attribute name="author_" attributeType="String"/>
         <attribute name="publicationDate_" attributeType="Date" usesScalarValueType="NO"/>
@@ -11,7 +11,7 @@
         <attribute name="url_" attributeType="String"/>
     </entity>
     <elements>
+        <element name="FeedDescriptor" positionX="-63" positionY="36" width="128" height="29"/>
         <element name="Post" positionX="-63" positionY="-18" width="128" height="134"/>
-        <element name="Feed" positionX="-63" positionY="36" width="128" height="29"/>
     </elements>
 </model>

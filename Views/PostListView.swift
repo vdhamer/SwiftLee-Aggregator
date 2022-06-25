@@ -11,7 +11,6 @@ struct PostListView: View {
 
     var testString: String?
 
-//    @State var blogPosts = [Post]() // TODO was used when there was no CoreData
     @FetchRequest var postFetchRequest: FetchedResults<Post>
     @State var searchText: String = ""
     @Environment(\.isSearching) private var isSearching
@@ -27,8 +26,9 @@ struct PostListView: View {
 
     init(testString: String?, predicate: NSPredicate, searchText: Binding<String>) {
         self.testString = testString
+
         _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
-//                                                SortDescriptor(\.publicationDate, order: .reverse) // TODO
+                                                SortDescriptor(\.publicationDate_, order: .reverse)
                                             ],
                                              predicate: predicate,
                                              animation: .default)
@@ -76,7 +76,7 @@ struct PostListView: View {
                     fillBlogPosts()
                 }
                 .refreshable {
-//                    fillBlogPosts() // TODO
+                    fillBlogPosts()
                 }
                 .animation(.spring(), value: searchText) // non-default animations don't work?
                 .navigationTitle("SwiftLee")
@@ -121,7 +121,7 @@ struct PostListView: View {
     }
 
     func fetchJsonData(page: Int) async -> [Post] {
-        guard page > 0 else { fatalError("page value must be positive (but is \(page)") } // a bit paranoid, I guess
+        guard page > 0 else { fatalError("page value must be positive (but is \(page)") } // maybe a bit paranoid
 
         let url = URL(string: swiftLeeFeed2Url+"\(page)&api_key=\(apiKey)")!
         let decoder = getDecoder()
@@ -141,7 +141,7 @@ struct PostListView: View {
     }
 
     func fillBlogPosts() {
-        if testString == nil {
+        if testString == nil || testString == "" {
             fillBlogPostsFromServer()
         } else { // fetch online data
             fillBlogPostsFromString(string: testString!)
@@ -160,25 +160,11 @@ struct PostListView: View {
                 newPage = await fetchJsonData(page: page)
                 for post in newPage {
                     // TODO add to database
-                    print("\(post.publicationDate)")
+                    print("RSS: publication date: \(post.publicationDate), total count: \(postFetchRequest.count)")
                 }
-//                blogPosts.append(contentsOf: newPage)
                 try context.save()
                 pageSize = max(pageSize, newPage.count) // largest received page
             } while newPage.count == pageSize // stop on first empty or partially filled page TODO
-
-            // reporting
-            print("""
-                  Found a total of \(postFetchRequest.count) posts \
-                  on \(postFetchRequest.count/pageSize) pages \
-                  with \(pageSize) posts each
-                  """, terminator: "")
-            if newPage.count==0 {
-                print(".") // no partially filled page at end
-            } else { // partially filled page at end
-                let remainder = postFetchRequest.count % pageSize
-                print(", plus a final page containing the last \(remainder) posts.")
-            }
         }
     }
 
@@ -188,9 +174,8 @@ struct PostListView: View {
             let root = try getDecoder().decode(Page.self, from: jsonData)
             for post in root.postings {
                 // TODO add to database
-                print("\(post.publicationDate)")
+                print("STRING: publication date: \(post.publicationDate), total count: \(postFetchRequest.count)")
             }
-//            blogPosts.append(contentsOf: root.postings)
             try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
@@ -220,7 +205,7 @@ struct PostListView_Previews: PreviewProvider {
     @State static var searchText = ""
     static var previews: some View {
         PostListView(testString: hardcodedJsonString,
-                     predicate: NSPredicate(format: "TRUEPREDICATE"), // TODO .all should work
+                     predicate: NSPredicate.all,
                      searchText: $searchText)
     }
 

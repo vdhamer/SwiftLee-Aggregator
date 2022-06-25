@@ -18,7 +18,7 @@ struct SwiftLeeAggregatorApp: App {
     var body: some Scene {
         WindowGroup {
             PostListView(testString: nil /*PostListView_Previews.hardcodedJsonString*/,
-                         predicate: NSPredicate(format: "TRUEPREDICATE"), // TODO
+                         predicate: NSPredicate.all,
                          searchText: $searchText)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

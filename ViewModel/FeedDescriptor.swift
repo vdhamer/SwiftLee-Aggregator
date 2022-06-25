@@ -7,7 +7,7 @@
 
 import CoreData
 
-class Feed: NSManagedObject, Decodable {
+class FeedDescriptor: NSManagedObject, Decodable {
 
     enum CodingKeys: String, CodingKey, Hashable { // in same order as JSON file
         case url
