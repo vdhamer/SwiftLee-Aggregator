@@ -52,7 +52,8 @@ extension Post {
             if let title = title_ {
                 return title
             } else {
-                fatalError("Error because stored publicationDate is nil")
+                print("Error: stored title is nil")
+                return "Error because stored title is nil"
             }
         }
         set {
@@ -91,7 +92,8 @@ extension Post {
             if let shortURL = shortURL_ {
                 return shortURL
             } else {
-                fatalError("Error because stored shortURL is nil")
+                print("Error: stored shortURL is nil")
+                return "Error because stored shortURL is nil"
             }
         }
         set {
@@ -135,89 +137,85 @@ extension Post {
     }
 
     var id: String { // computed property
-        title
+        shortURL
     }
 
 }
 
-extension Post { // findCreateUpdate() records in Post table
-
-    // Find existing object or create a new object
-    // Update existing attributes or fill the new object
-    // swiftlint:disable:next function_parameter_count
-    static func findCreateUpdate(context: NSManagedObjectContext,
-                                 // identifying attributes
-                                 title: String,
-                                  // other attributes of a Post
-                                 publicationDate: Date, url: String, shortURL: String,
-                                 author: String, thumbNailURL: String, synopsis: String
-                                ) -> Post {
-
-        let predicateFormat: String = "title_ = %@" // avoid localization, search on identifying attr's only
-        let request = fetchRequest(predicate: NSPredicate(format: predicateFormat, title))
-
-        let posts: [Post] = (try? context.fetch(request)) ?? [] // nil means absolute failure TODO add error msg
-
-        if let post = posts.first { // already exists, so make sure secondary attributes are up to date
-            let updated: Bool = update(context: context, post: post,
-                                       publicationDate: publicationDate, url: url, shortURL: shortURL,
-                                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
-            if updated {
-                print("Updated info for post \(post.id) published on \(post.publicationDate)")
-            }
-            return post
-        } else {
-            let post = Post(context: context) // create new Member object
-            post.title_ = title
-            _ = update(context: context, post: post,
-                       publicationDate: publicationDate, url: url, shortURL: shortURL,
-                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
-            print("Created new record for post \(post.id) published on \(post.publicationDate)")
-            return post
-        }
-    }
-
-    // Update non-identifying attributes/properties within existing instance of class PhotoClub
-    // swiftlint:disable:next function_parameter_count
-    private static func update(context: NSManagedObjectContext, post: Post,
-                               publicationDate: Date?, url: String?, shortURL: String?,
-                               author: String?, thumbNailURL: String?, synopsis: String?
-                              ) -> Bool {
-        var modified: Bool = false
-
-        context.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump // not sure about this, prevents error
-
-        // function only works for non-optional Types.
-        // If optional support needed, create variant with "inout Type?" instead of "inout Type"
-        func updateIfChanged<Type>(update persistedValue: inout Type, with newValue: Type?) where Type: Equatable {
-            if let newValue = newValue { // if newValue == nil, don't change persistedValue
-                if newValue != persistedValue {
-                    persistedValue = newValue
-                    modified = true
-                }
-            }
-        }
-
-        updateIfChanged(update: &post.publicationDate, with: publicationDate)
-        updateIfChanged(update: &post.url, with: url)
-        updateIfChanged(update: &post.shortURL, with: shortURL)
-
-        updateIfChanged(update: &post.author, with: author)
-        updateIfChanged(update: &post.thumbNailURL, with: thumbNailURL)
-        updateIfChanged(update: &post.synopsis, with: synopsis)
-
-        if modified {
-            do {
-                try context.save()
-            } catch {
-                fatalError("Update failed for for post \(post.id) published on \(post.publicationDate)" +
-                           "\(error)")
-            }
-        }
-        return modified
-    }
-
-}
+// extension Post { // findCreateUpdate() records in Post table
+//
+//    // Find existing object or create a new object
+//    // Update existing attributes or fill the new object
+//    static func findCreateUpdate(context: NSManagedObjectContext,
+//                                 // identifying attributes
+//                                 title: String,
+//                                  // other attributes of a Post
+//                                 publicationDate: Date, url: String, shortURL: String,
+//                                 author: String, thumbNailURL: String, synopsis: String
+//                                ) -> Post {
+//
+//        let predicateFormat: String = "title_ = %@" // avoid localization, search on identifying attr's only
+//        let request = fetchRequest(predicate: NSPredicate(format: predicateFormat, title))
+//
+//        let posts: [Post] = (try? context.fetch(request)) ?? [] // nil means absolute failure
+//
+//        if let post = posts.first { // already exists, so make sure secondary attributes are up to date
+//            let updated: Bool = update(context: context, post: post,
+//                                       publicationDate: publicationDate, url: url, shortURL: shortURL,
+//                                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
+//            if updated {
+//                print("Updated info for post \(post.id) published on \(post.publicationDate)")
+//            }
+//            return post
+//        } else {
+//            let post = Post(context: context) // create new Member object
+//            post.title_ = title
+//            _ = update(context: context, post: post,
+//                       publicationDate: publicationDate, url: url, shortURL: shortURL,
+//                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
+//            print("Created new record for post \(post.id) published on \(post.publicationDate)")
+//            return post
+//        }
+//    }
+//
+//    // Update non-identifying attributes/properties within existing instance of class PhotoClub
+//    private static func update(context: NSManagedObjectContext, post: Post,
+//                               publicationDate: Date?, url: String?, shortURL: String?,
+//                               author: String?, thumbNailURL: String?, synopsis: String?
+//                              ) -> Bool {
+//        var modified: Bool = false
+//
+//        // function only works for non-optional Types.
+//        // If optional support needed, create variant with "inout Type?" instead of "inout Type"
+//        func updateIfChanged<Type>(update persistedValue: inout Type, with newValue: Type?) where Type: Equatable {
+//            if let newValue = newValue { // if newValue == nil, don't change persistedValue
+//                if newValue != persistedValue {
+//                    persistedValue = newValue
+//                    modified = true
+//                }
+//            }
+//        }
+//
+//        updateIfChanged(update: &post.publicationDate, with: publicationDate)
+//        updateIfChanged(update: &post.url, with: url)
+//        updateIfChanged(update: &post.shortURL, with: shortURL)
+//
+//        updateIfChanged(update: &post.author, with: author)
+//        updateIfChanged(update: &post.thumbNailURL, with: thumbNailURL)
+//        updateIfChanged(update: &post.synopsis, with: synopsis)
+//
+//        if modified {
+//            do {
+//                try context.save()
+//            } catch {
+//                fatalError("Update failed for for post \(post.id) published on \(post.publicationDate)" +
+//                           "\(error)")
+//            }
+//        }
+//        return modified
+//    }
+//
+// }
 
 extension Post { // convenience function
 
@@ -225,7 +223,7 @@ extension Post { // convenience function
         let request = NSFetchRequest<Post>(entityName: "Post")
         request.predicate = predicate // WHERE part of the SQL query
         request.sortDescriptors = [
-                                    NSSortDescriptor(keyPath: \Post.title_, ascending: true)
+                                    NSSortDescriptor(keyPath: \Post.publicationDate_, ascending: false)
         ]
         return request
     }

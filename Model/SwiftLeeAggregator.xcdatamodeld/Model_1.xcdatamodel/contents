@@ -9,9 +9,14 @@
         <attribute name="thumbNailURL_" optional="YES" attributeType="String"/>
         <attribute name="title_" attributeType="String"/>
         <attribute name="url_" attributeType="String"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="shortURL_"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="FeedDescriptor" positionX="-63" positionY="36" width="128" height="29"/>
-        <element name="Post" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="FeedDescriptor" positionX="-118.755859375" positionY="61.4368896484375" width="128" height="29"/>
+        <element name="Post" positionX="58.631591796875" positionY="107.978271484375" width="128" height="134"/>
     </elements>
 </model>

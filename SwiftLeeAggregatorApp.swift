@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct SwiftLeeAggregatorApp: App {
@@ -14,6 +15,11 @@ struct SwiftLeeAggregatorApp: App {
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
     @State var searchText: String = ""
+
+    init() {
+        let viewContext = persistenceController.container.viewContext
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+    }
 
     var body: some Scene {
         WindowGroup {

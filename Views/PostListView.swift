@@ -40,25 +40,29 @@ struct PostListView: View {
             NavigationView {
                 List {
                     Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
-                    ForEach(filteredPostQueryResults) { blogPost in
+                    ForEach(filteredPostQueryResults) { post in
                         HStack(alignment: .top) {
                             Image(systemName: "envelope.fill") // see also "envelope.open.fill"
                                 .padding(.top, 4.5)
                                 .foregroundColor(.brown)
                             VStack(alignment: .leading) {
-                                Link(destination: URL(string: blogPost.url) ??
+                                Link(destination: URL(string: post.url) ??
                                                   URL(string: "http:www.example.com")!, label: {
-                                    Text(blogPost.title)
+                                    Text(post.title)
                                         .font(.title3)
                                         .lineLimit(2)
                                         .truncationMode(.middle)
                                         .foregroundColor(.accentColor)
                                 })
-                                Text(blogPost.url/*.absoluteString*/)
+                                Text(post.url)
                                     .lineLimit(1)
                                     .truncationMode(.head)
                                     .foregroundColor(.gray)
-                                Text(viewDateFormatter.string(from: blogPost.publicationDate))
+                                Text(post.shortURL)
+                                    .lineLimit(1)
+                                    .truncationMode(.head)
+                                    .foregroundColor(.gray)
+                                Text(viewDateFormatter.string(from: post.publicationDate))
                                     .font(.footnote)
                             }
                         }
@@ -158,24 +162,17 @@ struct PostListView: View {
             repeat { // fetching one page at a time (note: we don't know home many to expect)
                 page += 1
                 newPage = await fetchJsonData(page: page)
-                for post in newPage {
-                    // TODO add to database
-                    print("RSS: publication date: \(post.publicationDate), total count: \(postFetchRequest.count)")
-                }
                 try context.save()
+                print("Page \(page) has \(newPage.count) postings")
                 pageSize = max(pageSize, newPage.count) // largest received page
-            } while newPage.count == pageSize // stop on first empty or partially filled page TODO
+            } while newPage.count == pageSize // stop on first empty or partially filled page
         }
     }
 
     func fillBlogPostsFromString(string: String) {
         do { // fetch offline data
             let jsonData = string.data(using: .utf8)!
-            let root = try getDecoder().decode(Page.self, from: jsonData)
-            for post in root.postings {
-                // TODO add to database
-                print("STRING: publication date: \(post.publicationDate), total count: \(postFetchRequest.count)")
-            }
+            _ = try getDecoder().decode(Page.self, from: jsonData)
             try context.save()
         } catch {
             print("Error decoding hardcoded JSON string: \"\(error)\"")
