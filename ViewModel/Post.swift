@@ -19,6 +19,7 @@ class Post: NSManagedObject, Decodable {
         case author
         case thumbNailURL = "thumbnail"
         case synopsis = "description"
+//        case readIt = "dummy"
         // missing content
         // missing enclosure
         // missing catagories
@@ -39,6 +40,7 @@ class Post: NSManagedObject, Decodable {
         self.author = try container.decode(String.self, forKey: .author)
         self.thumbNailURL = try container.decode(String.self, forKey: .thumbNailURL)
         self.synopsis = try container.decode(String.self, forKey: .synopsis)
+//        self.readIt = try container.decode(Bool.self, forKey: .readIt) // dummy
         // missing content
         // missing enclosure
         // missing categories
@@ -140,6 +142,45 @@ extension Post {
         shortURL
     }
 
+    var readIt: Bool { // computed property
+        get {
+            if let storedValue = readIt_ {
+                return storedValue == 1
+            } else {
+                return false
+            }
+        }
+        set {
+            switch newValue {
+            case true: readIt_ = 1
+            case false: readIt_ = 0
+            }
+        }
+    }
+
+}
+
+extension Post {
+
+    static func persistReadIt(objectId: NSManagedObjectID, context: NSManagedObjectContext) {
+
+        guard let post = fetchPost(for: objectId, context: context) else { fatalError("Cannot find Post") }
+
+        post.readIt = true
+
+        do {
+            try context.save()
+            print("Saved readIt status: \(post.readIt) for post [\(post.title)]")
+        } catch {
+            print("Error setting read-status: \(error)")
+        }
+    }
+
+    static private func fetchPost(for objectId: NSManagedObjectID, context: NSManagedObjectContext) -> Post? {
+        guard let post = context.object(with: objectId) as? Post else { return nil }
+
+        return post
+    }
 }
 
 // extension Post { // findCreateUpdate() records in Post table

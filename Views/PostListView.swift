@@ -42,7 +42,7 @@ struct PostListView: View {
                     Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
                     ForEach(filteredPostQueryResults) { post in
                         HStack(alignment: .top) {
-                            Image(systemName: "envelope.fill") // see also "envelope.open.fill"
+                            Image(systemName: post.readIt ? "envelope.open.fill" : "envelope.fill")
                                 .padding(.top, 4.5)
                                 .foregroundColor(.brown)
                             VStack(alignment: .leading) {
@@ -54,6 +54,11 @@ struct PostListView: View {
                                         .truncationMode(.middle)
                                         .foregroundColor(.accentColor)
                                 })
+                                    .environment(\.openURL, OpenURLAction { _ in
+                                        post.readIt = true
+                                        Post.persistReadIt(objectId: post.objectID, context: context)
+                                        return .systemAction
+                                    })
                                 Text(post.url)
                                     .lineLimit(1)
                                     .truncationMode(.head)
@@ -163,7 +168,7 @@ struct PostListView: View {
                 page += 1
                 newPage = await fetchJsonData(page: page)
                 try context.save()
-                print("Page \(page) has \(newPage.count) postings")
+//                print("Page \(page) has \(newPage.count) postings")
                 pageSize = max(pageSize, newPage.count) // largest received page
             } while newPage.count == pageSize // stop on first empty or partially filled page
         }

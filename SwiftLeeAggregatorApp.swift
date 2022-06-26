@@ -18,12 +18,12 @@ struct SwiftLeeAggregatorApp: App {
 
     init() {
         let viewContext = persistenceController.container.viewContext
-        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump // mergeByPropertyObjectTrump
     }
 
     var body: some Scene {
         WindowGroup {
-            PostListView(testString: nil /*PostListView_Previews.hardcodedJsonString*/,
+            PostListView(testString: nil, // PostListView_Previews.hardcodedJsonString,
                          predicate: NSPredicate.all,
                          searchText: $searchText)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
