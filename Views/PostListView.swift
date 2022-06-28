@@ -24,7 +24,7 @@ struct PostListView: View {
                                                                 .destructiveAction : // iPad: Search field in toolbar
                                                                 .navigationBarTrailing // iPhone: Search field in drawer
 
-    init(testString: String?, predicate: NSPredicate, searchText: Binding<String>) {
+    init(testString: String?, predicate: NSPredicate) {
         self.testString = testString
 
         _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
@@ -60,10 +60,6 @@ struct PostListView: View {
                                         return .systemAction
                                     })
                                 Text(post.url)
-                                    .lineLimit(1)
-                                    .truncationMode(.head)
-                                    .foregroundColor(.gray)
-                                Text(post.shortURL)
                                     .lineLimit(1)
                                     .truncationMode(.head)
                                     .foregroundColor(.gray)
@@ -168,7 +164,6 @@ struct PostListView: View {
                 page += 1
                 newPage = await fetchJsonData(page: page)
                 try context.save()
-//                print("Page \(page) has \(newPage.count) postings")
                 pageSize = max(pageSize, newPage.count) // largest received page
             } while newPage.count == pageSize // stop on first empty or partially filled page
         }
@@ -207,8 +202,7 @@ struct PostListView_Previews: PreviewProvider {
     @State static var searchText = ""
     static var previews: some View {
         PostListView(testString: hardcodedJsonString,
-                     predicate: NSPredicate.all,
-                     searchText: $searchText)
+                     predicate: NSPredicate.all)
     }
 
     static let hardcodedJsonString: String = """
