@@ -11,7 +11,7 @@
 		D0429279284D4DD6001B5810 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D0429278284D4DD6001B5810 /* README.md */; };
 		D0572323285FCF3100190990 /* FeedDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0572322285FCF3100190990 /* FeedDescriptor.swift */; };
 		D07D398C2853FEF2000B9EAE /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = D07D398B2853FEF2000B9EAE /* LICENSE.txt */; };
-		D0BA7B942868EC18003F5F74 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = D0BA7B932868EC18003F5F74 /* screenshot.png */; };
+		D08100FB286BABC000322917 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = D08100FA286BABC000322917 /* screenshot.png */; };
 		D0C4F800285F31E2001251DA /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C4F7FF285F31E2001251DA /* PersistenceController.swift */; };
 		D0CD340B2857E18A0078527E /* UIDevice+IsIPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */; };
 		D0E69904284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */; };
@@ -33,7 +33,7 @@
 		D0429278284D4DD6001B5810 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0572322285FCF3100190990 /* FeedDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDescriptor.swift; sourceTree = "<group>"; };
 		D07D398B2853FEF2000B9EAE /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		D0BA7B932868EC18003F5F74 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		D08100FA286BABC000322917 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		D0C4F7FF285F31E2001251DA /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D0CD340A2857E18A0078527E /* UIDevice+IsIPad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+IsIPad.swift"; sourceTree = "<group>"; };
 		D0E698D2284BD2FB003D6AB8 /* SwiftLeeAggregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftLeeAggregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +74,7 @@
 		D0410B4A284E0F6B0012E0E3 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				D0BA7B932868EC18003F5F74 /* screenshot.png */,
+				D08100FA286BABC000322917 /* screenshot.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				D0429279284D4DD6001B5810 /* README.md in Resources */,
 				D07D398C2853FEF2000B9EAE /* LICENSE.txt in Resources */,
 				D0E69906284BF679003D6AB8 /* Preview Assets.xcassets in Resources */,
-				D0BA7B942868EC18003F5F74 /* screenshot.png in Resources */,
+				D08100FB286BABC000322917 /* screenshot.png in Resources */,
 				D0E69905284BF679003D6AB8 /* Assets.xcassets in Resources */,
 				D0E69913284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings in Resources */,
 			);
