@@ -47,7 +47,7 @@ struct PostListView: View {
                                     .padding(.top, 4.5)
                                     .foregroundColor(.brown)
                                 Image(systemName: "star.fill")
-                                    .opacity(post.star ? 1 : 0)
+                                    .opacity(post.star ? 1 : 0) // hide and unhide
                                     .padding(.top, 4.5)
                                     .foregroundColor(.yellow)
                             }
@@ -80,7 +80,6 @@ struct PostListView: View {
                             } label: {
                                 Star(current: post.star)
                             }
-//                            .tint(.teal)
                             Button {
                                 post.readIt.toggle()
                                 Post.persistReadIt(objectId: post.objectID, context: context, newValue: post.readIt)
@@ -88,7 +87,6 @@ struct PostListView: View {
                                 Label("Unread", systemImage: post.readIt ? "envelope.fill" : "envelope.open.fill")
                                     .foregroundColor(.brown)
                             }
-//                            .tint(.teal)
                         }
                     }
                 }

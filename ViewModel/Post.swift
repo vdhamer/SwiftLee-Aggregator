@@ -193,7 +193,6 @@ extension Post {
 
         do {
             try context.save()
-            print("Saved readIt status: \(post.readIt) for post [\(post.title)]")
         } catch {
             print("Error setting read-status: \(error)")
         }
@@ -209,7 +208,6 @@ extension Post {
 
         do {
             try context.save()
-            print("Saved star status: \(post.star) for post [\(post.title)]")
         } catch {
             print("Error setting star-status: \(error)")
         }
