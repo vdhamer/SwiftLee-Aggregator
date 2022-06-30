@@ -42,9 +42,15 @@ struct PostListView: View {
                     Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
                     ForEach(filteredPostQueryResults) { post in
                         HStack(alignment: .top) {
-                            Image(systemName: post.readIt ? "envelope.open.fill" : "envelope.fill")
-                                .padding(.top, 4.5)
-                                .foregroundColor(.brown)
+                            VStack {
+                                Image(systemName: post.readIt ? "envelope.open.fill" : "envelope.fill")
+                                    .padding(.top, 4.5)
+                                    .foregroundColor(.brown)
+                                Image(systemName: "star.fill")
+                                    .opacity(post.star ? 1 : 0)
+                                    .padding(.top, 4.5)
+                                    .foregroundColor(.yellow)
+                            }
                             VStack(alignment: .leading) {
                                 Link(destination: URL(string: post.url) ??
                                                   URL(string: "http:www.example.com")!, label: {
@@ -56,7 +62,7 @@ struct PostListView: View {
                                 })
                                     .environment(\.openURL, OpenURLAction { _ in
                                         post.readIt = true
-                                        Post.persistReadIt(objectId: post.objectID, context: context)
+                                        Post.persistReadIt(objectId: post.objectID, context: context, newValue: true)
                                         return .systemAction
                                     })
                                 Text(post.url)
@@ -66,6 +72,23 @@ struct PostListView: View {
                                 Text(viewDateFormatter.string(from: post.publicationDate))
                                     .font(.footnote)
                             }
+                        }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button {
+                                post.star.toggle()
+                                Post.persistStar(objectId: post.objectID, context: context, newValue: post.star)
+                            } label: {
+                                Star(current: post.star)
+                            }
+//                            .tint(.teal)
+                            Button {
+                                post.readIt.toggle()
+                                Post.persistReadIt(objectId: post.objectID, context: context, newValue: post.readIt)
+                            } label: {
+                                Label("Unread", systemImage: post.readIt ? "envelope.fill" : "envelope.open.fill")
+                                    .foregroundColor(.brown)
+                            }
+//                            .tint(.teal)
                         }
                     }
                 }
@@ -87,6 +110,16 @@ struct PostListView: View {
                 .navigationTitle("SwiftLee")
             }
             .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
+        }
+    }
+
+    struct Star: View {
+        var current: Bool
+
+        var body: some View {
+            Image(systemName: current ? "star.slash" : "star.fill")
+                .foregroundStyle(.yellow, .gray, .red)
+                .symbolRenderingMode(.palette)
         }
     }
 

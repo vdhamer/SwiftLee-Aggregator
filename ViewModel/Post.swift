@@ -19,7 +19,8 @@ class Post: NSManagedObject, Decodable {
         case author
         case thumbNailURL = "thumbnail"
         case synopsis = "description"
-//        case readIt = "dummy"
+        // case readIt = "dummy1"
+        // case star = "dummy2"
         // missing content
         // missing enclosure
         // missing catagories
@@ -68,7 +69,8 @@ extension Post {
             if let publicationDate = publicationDate_ {
                 return publicationDate
             } else {
-                fatalError("Error because stored publicationDate is nil")
+                print("Error: stored publicationDate is nil")
+                return Date()
             }
         }
         set {
@@ -81,7 +83,8 @@ extension Post {
             if let url = url_ {
                 return url
             } else {
-                fatalError("Error because stored URL is nil")
+                print("Error: stored URL is nil")
+                return "Error because stored URL is nil"
             }
         }
         set {
@@ -108,7 +111,8 @@ extension Post {
             if let author = author_ {
                 return author
             } else {
-                fatalError("Error because stored author is nil")
+                print("Error: stored author is nil")
+                return "Error because stored author is nil"
             }
         }
         set {
@@ -121,7 +125,8 @@ extension Post {
             if let thumbNailURL = thumbNailURL_ {
                 return thumbNailURL
             } else {
-                fatalError("Error because stored thumbNailURL is nil")
+                print("Error: stored thumbNailURL is  nil")
+                return "Error because stored thumbNailURL is nil"
             }
         }
         set {
@@ -158,21 +163,55 @@ extension Post {
         }
     }
 
+    var star: Bool { // computed property
+        get {
+            if let storedValue = star_ {
+                return storedValue == 1
+            } else {
+                return false
+            }
+        }
+        set {
+            switch newValue {
+            case true: star_ = 1
+            case false: star_ = 0
+            }
+        }
+    }
+
 }
 
 extension Post {
 
-    static func persistReadIt(objectId: NSManagedObjectID, context: NSManagedObjectContext) {
+    static func persistReadIt(objectId: NSManagedObjectID,
+                              context: NSManagedObjectContext,
+                              newValue: Bool) {
 
         guard let post = fetchPost(for: objectId, context: context) else { fatalError("Cannot find Post") }
 
-        post.readIt = true
+        post.readIt = newValue
 
         do {
             try context.save()
             print("Saved readIt status: \(post.readIt) for post [\(post.title)]")
         } catch {
             print("Error setting read-status: \(error)")
+        }
+    }
+
+    static func persistStar(objectId: NSManagedObjectID,
+                            context: NSManagedObjectContext,
+                            newValue: Bool) {
+
+        guard let post = fetchPost(for: objectId, context: context) else { fatalError("Cannot find Post") }
+
+        post.star = newValue
+
+        do {
+            try context.save()
+            print("Saved star status: \(post.star) for post [\(post.title)]")
+        } catch {
+            print("Error setting star-status: \(error)")
         }
     }
 

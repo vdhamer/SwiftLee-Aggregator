@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G624" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="20G630" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FeedDescriptor" representedClassName=".FeedDescriptor" syncable="YES" codeGenerationType="category"/>
     <entity name="Post" representedClassName=".Post" syncable="YES" codeGenerationType="category">
         <attribute name="author_" attributeType="String"/>
         <attribute name="publicationDate_" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="readIt_" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
         <attribute name="shortURL_" attributeType="String"/>
+        <attribute name="star_" optional="YES" attributeType="Boolean" usesScalarValueType="NO"/>
         <attribute name="synopsis_" attributeType="String"/>
         <attribute name="thumbNailURL_" optional="YES" attributeType="String"/>
         <attribute name="title_" attributeType="String"/>
@@ -18,6 +19,6 @@
     </entity>
     <elements>
         <element name="FeedDescriptor" positionX="-118.755859375" positionY="61.4368896484375" width="128" height="29"/>
-        <element name="Post" positionX="58.631591796875" positionY="107.978271484375" width="128" height="149"/>
+        <element name="Post" positionX="58.631591796875" positionY="107.978271484375" width="128" height="164"/>
     </elements>
 </model>
