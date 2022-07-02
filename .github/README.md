@@ -76,14 +76,16 @@ The line is commented out because I have a second file containing my own `let ap
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Usage
-When you launch the app, and it will list all currently available posts on SwiftLee's site.
+## Usage and features
+When you launch the app, it will list all posts on SwiftLee's site. The first time may take a few seconds.
 
-The Search field allows you to filter the available posts. It searches the title fields only; it does not search the actual post text or keywords.
+The Search field allows you to filter the list of posts. It searches the title fields only; it does not search the post's full text or keywords.
 
-If you click on an post's entry on the list, it will load the actual post in a browser tab.
+If you click on an post's entry on the list, it will load the actual post in a browser tab. It will also mark the entry as "read" (using Core Data).
 
-The app keeps track on which posts you have opened using a database (Core Data). At the moment, you can't "unread" a post. But you can clear the on-device database by removing and reinstalling the app.
+You can toggle the read/unread status by swiping the entry to the left and tapping the opened/closed envelope button.
+
+You can mark interesting items with a star (swipe to the left). And you can remove the star rating at any time in a similar way.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
