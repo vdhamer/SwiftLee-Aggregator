@@ -43,7 +43,8 @@ struct PostListView: View {
                     ForEach(filteredPostQueryResults) { post in
                         HStack(alignment: .top) {
                             VStack {
-                                Image(systemName: post.readIt ? "envelope.open.fill" : "envelope.fill")
+                                Image(systemName: "circle.fill")
+                                    .opacity(post.readIt ? 0 : 1) // hide and unhide
                                     .padding(.top, 4.5)
                                     .foregroundColor(.brown)
                                 Image(systemName: "star.fill")
