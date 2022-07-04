@@ -17,7 +17,7 @@ struct SwiftLeeAggregatorApp: App {
 
     init() {
         let viewContext = persistenceController.container.viewContext
-        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump // mergeByPropertyObjectTrump
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
     }
 
     var body: some Scene {
