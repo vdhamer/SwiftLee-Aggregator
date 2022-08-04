@@ -17,7 +17,8 @@ struct SwiftLeeAggregatorApp: App {
 
     init() {
         let viewContext = persistenceController.container.viewContext
-        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+        // SwiftLee apparently sometimes updates an artible: title and shortURL stay the same, publication date changes
+        viewContext.mergePolicy = NSMergePolicy.overwrite
     }
 
     var body: some Scene {
