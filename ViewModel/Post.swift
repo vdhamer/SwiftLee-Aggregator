@@ -144,7 +144,7 @@ extension Post {
     }
 
     var id: String { // computed property
-        shortURL
+        title
     }
 
     var readIt: Bool { // computed property
