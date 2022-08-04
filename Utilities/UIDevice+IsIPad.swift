@@ -5,6 +5,7 @@
 //  Created by Peter van den Hamer on 05/04/2022.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension UIDevice {
@@ -16,3 +17,5 @@ extension UIDevice {
         UIDevice.current.userInterfaceIdiom == .phone
     }
 }
+
+#endif

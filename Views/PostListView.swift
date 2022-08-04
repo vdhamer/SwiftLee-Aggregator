@@ -20,9 +20,24 @@ struct PostListView: View {
     private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
 
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
-    private let toolbarItemPlacement: ToolbarItemPlacement = UIDevice.isIPad ?
-                                                                .destructiveAction : // iPad: Search field in toolbar
-                                                                .navigationBarTrailing // iPhone: Search field in drawer
+
+    private var toolbarItemPlacement: ToolbarItemPlacement {
+        if PostListView.isIPad {
+            return  .destructiveAction // iPad: Search field in toolbar
+        }
+        #if iOS
+            return .navigationBarTrailing // iPhone: Search field in drawer
+        #else
+            return .navigation
+        #endif
+    }
+
+    static var isIPad: Bool {
+        #if iOS
+            return UIDevice.isIPad
+        #endif
+        return false // Mac
+    }
 
     init(testString: String?, predicate: NSPredicate) {
         self.testString = testString
@@ -108,7 +123,7 @@ struct PostListView: View {
                 .animation(.spring(), value: searchText) // non-default animations don't work?
                 .navigationTitle("SwiftLee")
             }
-            .navigationViewStyle(StackNavigationViewStyle()) // avoids split screen on iPad
+                .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 
@@ -129,19 +144,19 @@ struct PostListView: View {
 
         // https://www.reddit.com/r/SwiftUI/comments/trtw8r/searchable_environment_var_dismisssearch_and/
         var body: some View {
-                if UIDevice.isIPhone && isSearching {
-                    HStack {
-                        Spacer()
-                        Text("Showing \(searchResultsCount) of \(blogPostsCount) " +
-                             "\(searchResultsCount==1 ? "post" : "posts")")
-                            .font(.callout)
-                            .foregroundColor(.teal)
-                        Spacer()
-                    }
-                    .foregroundColor(.gray)
-                } else {
-                    EmptyView()
+            if !isSearching || PostListView.isIPad {
+                EmptyView()
+            } else {
+                HStack {
+                    Spacer()
+                    Text("Showing \(searchResultsCount) of \(blogPostsCount) " +
+                         "\(searchResultsCount==1 ? "post" : "posts")")
+                    .font(.callout)
+                    .foregroundColor(.teal)
+                    Spacer()
                 }
+                .foregroundColor(.gray)
+            }
         }
     }
 
