@@ -33,7 +33,7 @@ struct PostListView: View {
     }
 
     static var isIPad: Bool {
-        #if iOS
+        #if os(iOS)
             return UIDevice.isIPad
         #endif
         return false // Mac
