@@ -25,7 +25,7 @@ struct PostListView: View {
         if PostListView.isIPad {
             return  .destructiveAction // iPad: Search field in toolbar
         }
-        #if iOS
+        #if os(iOS)
             return .navigationBarTrailing // iPhone: Search field in drawer
         #else
             return .navigation
@@ -33,10 +33,10 @@ struct PostListView: View {
     }
 
     static var isIPad: Bool {
-        #if iOS
+        #if os(iOS)
             return UIDevice.isIPad
         #endif
-        return false // Mac
+        // return false // Mac
     }
 
     init(testString: String?, predicate: NSPredicate) {
