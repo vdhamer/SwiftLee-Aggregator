@@ -39,7 +39,7 @@ This app aggregates blog posts written by [SwiftLee](https://www.avanderlee.com)
 
 Note that this app is only a **SwiftLee aggregator** and ***not* an app developed by SwiftLee**. The author of the blog posts (SwiftLee) has no responsibility for the aggregator app. And the developer of the app (vdHamer) has no control over the postings. In case you are wondering, both parties did align :slightly_smiling_face:. 
 
-The aggregator uses a small database containing the metadata (title, date, URLs) of the postings on the SwiftLee site. It does not contain the blog posts themselves. When the app launches, the database is updated in background by fetching the SwiftLee website's RSS feed, passing the RSS through an online RSS-to-JSON convertor, decoding the JSON to memory, and merging the in-memory data with existing data in the database. The database (Apple's Core Data framework) improves app startup time, and furthermore tracks which posts have been viewed or liked by the user.
+The aggregator uses a small database containing the metadata (title, date, URLs) of the postings on the SwiftLee site. It does not contain the blog posts themselves. When the app launches, the database is updated in background by fetching the SwiftLee website's RSS feed, passing the RSS through an online RSS-to-JSON convertor, decoding the JSON to memory, and merging the in-memory data with existing data in the database. The database (Apple's Core Data framework) improves app startup time, and furthermore tracks which posts have been viewed or labelled with a :star: by the user.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
