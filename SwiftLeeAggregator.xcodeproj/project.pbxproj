@@ -99,7 +99,6 @@
 		D0E698F1284BF679003D6AB8 /* SwiftLeeAggregator */ = {
 			isa = PBXGroup;
 			children = (
-				D00C87BB2989CD0F0044D673 /* SwiftLeeAggregator-Info.plist */,
 				D0E698F3284BF679003D6AB8 /* SwiftLeeAggregatorApp.swift */,
 				D0E698F4284BF679003D6AB8 /* Assets.xcassets */,
 				D0E698FC284BF679003D6AB8 /* Views */,
@@ -109,6 +108,7 @@
 				D0E698F5284BF679003D6AB8 /* Preview Content */,
 				D0E6990E284C09EF003D6AB8 /* Localizable.strings */,
 				D0E69911284C09EF003D6AB8 /* SwiftLeeAggregator-InfoPlist.strings */,
+				D00C87BB2989CD0F0044D673 /* SwiftLeeAggregator-Info.plist */,
 				D0E69901284BF679003D6AB8 /* .gitignore */,
 				D0E69902284BF679003D6AB8 /* .github */,
 			);
