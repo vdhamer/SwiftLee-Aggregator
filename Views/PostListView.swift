@@ -55,7 +55,7 @@ struct PostListView: View {
             NavigationView {
                 List {
                     Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
-                    ForEach(filteredPostQueryResults) { post in
+                    ForEach(filteredPostQueryResults, id: \.id) { post in
                         HStack(alignment: .top) {
                             VStack {
                                 Image(systemName: "circle.fill")
@@ -268,7 +268,7 @@ struct PostListView_Previews: PreviewProvider {
               "title": "The start of a new blog",
               "pubDate": "2015-05-02 12:52:51",
               "link": "https://www.avanderlee.com/swift/the-start-of-a-new-blog/",
-              "guid": "http://www.avanderlee.com/?p=9",
+              "guid": "https://www.avanderlee.com/?p=9",
               "author": "Antoine van der Lee",
               "thumbnail": "",
               "description": "\(description)",
