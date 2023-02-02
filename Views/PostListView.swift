@@ -12,7 +12,7 @@ struct PostListView: View {
     var testString: String?
 
     @FetchRequest var postFetchRequest: FetchedResults<Post>
-    @State var searchText: String = ""
+    @State var searchText: String = "" // for search field
     @Environment(\.isSearching) private var isSearching
     @Environment(\.managedObjectContext) var context
 
@@ -108,8 +108,8 @@ struct PostListView: View {
                 true
             }
         } else {
-            return postFetchRequest.filter {
-                $0.title.lowercased().contains(searchText.lowercased()) // case insensitive
+            return postFetchRequest.filter { post in
+                post.title.lowercased().contains(searchText.lowercased()) // case insensitive
             }
         }
     }

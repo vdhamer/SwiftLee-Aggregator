@@ -140,8 +140,8 @@
 		D0E698F9284BF679003D6AB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0E698FB284BF679003D6AB8 /* Page.swift */,
 				D023E948285E329200532076 /* SwiftLeeAggregator.xcdatamodeld */,
+				D0E698FB284BF679003D6AB8 /* Page.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

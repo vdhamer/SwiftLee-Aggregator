@@ -1,5 +1,5 @@
 //
-//  Posting.swift
+//  Post.swift
 //  SwiftLeeAggregator
 //
 //  Created by Peter van den Hamer on 04/06/2022.
@@ -70,7 +70,7 @@ extension Post {
                 return publicationDate
             } else {
                 print("Error: stored publicationDate is nil")
-                return Date()
+                return Date() // today's date instead
             }
         }
         set {
@@ -98,12 +98,17 @@ extension Post {
                 return shortURL
             } else {
                 print("Error: stored shortURL is nil")
-                return "Error because stored shortURL is nil"
+                // return unique string
+                return "Error because stored shortURL is nil" + UUID().uuidString
             }
         }
         set {
             shortURL_ = newValue
         }
+    }
+
+    var id: String { // computed property
+        return shortURL
     }
 
     var author: String {
@@ -141,10 +146,6 @@ extension Post {
         set {
             synopsis_ = newValue
         }
-    }
-
-    var id: String { // computed property
-        shortURL
     }
 
     var readIt: Bool { // computed property
