@@ -1,5 +1,5 @@
 //
-//  ApiKey.swift
+//  Rss2jsonApiKey.swift
 //  SwiftLeeAggregator
 //
 //  Created by Peter van den Hamer on 05/06/2022.

@@ -12,12 +12,11 @@ struct PostListView: View {
     var testString: String?
 
     @FetchRequest var postFetchRequest: FetchedResults<Post>
-    @State var searchText: String = ""
+    @State var searchText: String = "" // for search field
     @Environment(\.isSearching) private var isSearching
     @Environment(\.managedObjectContext) var context
 
     private let jsonDateFormatter = DateFormatter() // formatter for dates in JSON data
-    private let viewDateFormatter = makeViewDateFormatter() // formatter for displaying dates
 
     let swiftLeeFeed2Url = "https://api.rss2json.com/v1/api.json?rss_url=https://www.avanderlee.com/feed?paged="
 
@@ -39,7 +38,7 @@ struct PostListView: View {
         // return false // Mac
     }
 
-    init(testString: String?, predicate: NSPredicate) {
+    init(testString: String?, predicate: NSPredicate = NSPredicate.all) {
         self.testString = testString
 
         _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
@@ -55,55 +54,8 @@ struct PostListView: View {
             NavigationView {
                 List {
                     Stats(searchResultsCount: filteredPostQueryResults.count, blogPostsCount: postFetchRequest.count)
-                    ForEach(filteredPostQueryResults) { post in
-                        HStack(alignment: .top) {
-                            VStack {
-                                Image(systemName: "circle.fill")
-                                    .opacity(post.readIt ? 0 : 1) // hide and unhide
-                                    .padding(.top, 4.5)
-                                    .foregroundColor(.brown)
-                                Image(systemName: "star.fill")
-                                    .opacity(post.star ? 1 : 0) // hide and unhide
-                                    .padding(.top, 4.5)
-                                    .foregroundColor(.yellow)
-                            }
-                            VStack(alignment: .leading) {
-                                Link(destination: URL(string: post.url) ??
-                                                  URL(string: "http:www.example.com")!, label: {
-                                    Text(post.title)
-                                        .font(.title3)
-                                        .lineLimit(2)
-                                        .truncationMode(.middle)
-                                        .foregroundColor(.accentColor)
-                                })
-                                    .environment(\.openURL, OpenURLAction { _ in
-                                        post.readIt = true
-                                        Post.persistReadIt(objectId: post.objectID, context: context, newValue: true)
-                                        return .systemAction
-                                    })
-                                Text(post.url)
-                                    .lineLimit(1)
-                                    .truncationMode(.head)
-                                    .foregroundColor(.gray)
-                                Text(viewDateFormatter.string(from: post.publicationDate))
-                                    .font(.footnote)
-                            }
-                        }
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            Button {
-                                post.star.toggle()
-                                Post.persistStar(objectId: post.objectID, context: context, newValue: post.star)
-                            } label: {
-                                Star(current: post.star)
-                            }
-                            Button {
-                                post.readIt.toggle()
-                                Post.persistReadIt(objectId: post.objectID, context: context, newValue: post.readIt)
-                            } label: {
-                                Label("Unread", systemImage: post.readIt ? "envelope.fill" : "envelope.open.fill")
-                                    .foregroundColor(.brown)
-                            }
-                        }
+                    ForEach(filteredPostQueryResults, id: \.id) { post in
+                        PostListInnerView(post: post, context: context)
                     }
                 }
                 .searchable(text: $searchText, placement: .toolbar, prompt: "Title search")
@@ -124,16 +76,6 @@ struct PostListView: View {
                 .navigationTitle("SwiftLee")
             }
                 .navigationViewStyle(StackNavigationViewStyle())
-        }
-    }
-
-    struct Star: View {
-        var current: Bool
-
-        var body: some View {
-            Image(systemName: current ? "star.slash" : "star.fill")
-                .foregroundStyle(.yellow, .gray, .red)
-                .symbolRenderingMode(.palette)
         }
     }
 
@@ -166,8 +108,8 @@ struct PostListView: View {
                 true
             }
         } else {
-            return postFetchRequest.filter {
-                $0.title.lowercased().contains(searchText.lowercased()) // case insensitive
+            return postFetchRequest.filter { post in
+                post.title.lowercased().contains(searchText.lowercased()) // case insensitive
             }
         }
     }
@@ -239,12 +181,6 @@ struct PostListView: View {
 
 }
 
-private func makeViewDateFormatter() -> DateFormatter {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "EEEE, MMM dd, yyyy"
-    return formatter
-}
-
 struct PostListView_Previews: PreviewProvider {
     @State static var searchText = ""
     static var previews: some View {
@@ -268,7 +204,7 @@ struct PostListView_Previews: PreviewProvider {
               "title": "The start of a new blog",
               "pubDate": "2015-05-02 12:52:51",
               "link": "https://www.avanderlee.com/swift/the-start-of-a-new-blog/",
-              "guid": "http://www.avanderlee.com/?p=9",
+              "guid": "https://www.avanderlee.com/?p=9",
               "author": "Antoine van der Lee",
               "thumbnail": "",
               "description": "\(description)",

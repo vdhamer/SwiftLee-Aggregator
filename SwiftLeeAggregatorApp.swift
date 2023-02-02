@@ -14,17 +14,20 @@ struct SwiftLeeAggregatorApp: App {
 
     @Environment(\.scenePhase) var scenePhase
     let persistenceController = PersistenceController.shared
+    let debug: Bool
 
     init() {
         let viewContext = persistenceController.container.viewContext
         // SwiftLee apparently sometimes updates an artible: title and shortURL stay the same, publication date changes
         viewContext.mergePolicy = NSMergePolicy.overwrite
+
+        debug = true
+        print("Running with debug in SwilftLeeAggregatorApp.swift set to \(debug)")
     }
 
     var body: some Scene {
         WindowGroup {
-            PostListView(testString: nil, // PostListView_Previews.hardcodedJsonString,
-                         predicate: NSPredicate.all)
+            PostListView(testString: debug ? PostListView_Previews.hardcodedJsonString : nil)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in
