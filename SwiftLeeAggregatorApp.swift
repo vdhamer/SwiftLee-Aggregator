@@ -13,21 +13,21 @@ struct SwiftLeeAggregatorApp: App {
     // https://www.hackingwithswift.com/quick-start/swiftui/how-to-configure-core-data-to-work-with-swiftui
 
     @Environment(\.scenePhase) var scenePhase
-    let persistenceController = PersistenceController.shared
-    let debug: Bool
+    private let persistenceController = PersistenceController.shared
+    private let swiftLeeDebugMode: Bool
 
     init() {
         let viewContext = persistenceController.container.viewContext
-        // SwiftLee apparently sometimes updates an artible: title and shortURL stay the same, publication date changes
+        // SwiftLee sometimes updates an article: title and shortURL stay the same but publication date changes
         viewContext.mergePolicy = NSMergePolicy.overwrite
 
-        debug = true
-        print("Running with debug in SwilftLeeAggregatorApp.swift set to \(debug)")
+        swiftLeeDebugMode = true
+        print("Running with debug in SwilftLeeAggregatorApp.swift set to \(swiftLeeDebugMode)")
     }
 
     var body: some Scene {
         WindowGroup {
-            PostListView(testString: debug ? PostListView_Previews.hardcodedJsonString : nil)
+            PostListView(swiftLeeDebugModePayloadString: swiftLeeDebugMode ? PostListView_Previews.hardcodedJsonString : nil)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in

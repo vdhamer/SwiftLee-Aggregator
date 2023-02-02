@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PostListView: View {
 
-    var testString: String?
+    var swiftLeeDebugModePayloadString: String?
 
     @FetchRequest var postFetchRequest: FetchedResults<Post>
     @State var searchText: String = "" // for search field
@@ -38,8 +38,8 @@ struct PostListView: View {
         // return false // Mac
     }
 
-    init(testString: String?, predicate: NSPredicate = NSPredicate.all) {
-        self.testString = testString
+    init(swiftLeeDebugModePayloadString: String?, predicate: NSPredicate = NSPredicate.all) {
+        self.swiftLeeDebugModePayloadString = swiftLeeDebugModePayloadString
 
         _postFetchRequest = FetchRequest<Post>(sortDescriptors: [ // replaces previous fetchRequest
                                                 SortDescriptor(\.publicationDate_, order: .reverse)
@@ -135,10 +135,10 @@ struct PostListView: View {
     }
 
     func fillBlogPosts() {
-        if testString == nil || testString == "" {
+        if swiftLeeDebugModePayloadString == nil || swiftLeeDebugModePayloadString == "" {
             fillBlogPostsFromServer()
         } else { // fetch online data
-            fillBlogPostsFromString(string: testString!)
+            fillBlogPostsFromString(string: swiftLeeDebugModePayloadString!)
         }
     }
 
@@ -184,8 +184,7 @@ struct PostListView: View {
 struct PostListView_Previews: PreviewProvider {
     @State static var searchText = ""
     static var previews: some View {
-        PostListView(testString: hardcodedJsonString,
-                     predicate: NSPredicate.all)
+        PostListView(swiftLeeDebugModePayloadString: hardcodedJsonString)
     }
 
     static let hardcodedJsonString: String = """
