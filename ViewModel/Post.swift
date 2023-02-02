@@ -140,44 +140,18 @@ extension Post {
     }
 
     var synopsis: String {
-        get {
-            synopsis_ ?? "No summary of post available."
-        }
-        set {
-            synopsis_ = newValue
-        }
+        get { synopsis_ ?? "No summary of post available." }
+        set { synopsis_ = newValue }
     }
 
     var readIt: Bool { // computed property
-        get {
-            if let storedValue = readIt_ {
-                return storedValue == 1
-            } else {
-                return false
-            }
-        }
-        set {
-            switch newValue {
-            case true: readIt_ = 1
-            case false: readIt_ = 0
-            }
-        }
+        get { readIt_ }
+        set { readIt_ = newValue }
     }
 
     var star: Bool { // computed property
-        get {
-            if let storedValue = star_ {
-                return storedValue == 1
-            } else {
-                return false
-            }
-        }
-        set {
-            switch newValue {
-            case true: star_ = 1
-            case false: star_ = 0
-            }
-        }
+        get { star_ }
+        set { star_ = newValue }
     }
 
 }
@@ -220,81 +194,6 @@ extension Post {
         return post
     }
 }
-
-// extension Post { // findCreateUpdate() records in Post table
-//
-//    // Find existing object or create a new object
-//    // Update existing attributes or fill the new object
-//    static func findCreateUpdate(context: NSManagedObjectContext,
-//                                 // identifying attributes
-//                                 title: String,
-//                                  // other attributes of a Post
-//                                 publicationDate: Date, url: String, shortURL: String,
-//                                 author: String, thumbNailURL: String, synopsis: String
-//                                ) -> Post {
-//
-//        let predicateFormat: String = "title_ = %@" // avoid localization, search on identifying attr's only
-//        let request = fetchRequest(predicate: NSPredicate(format: predicateFormat, title))
-//
-//        let posts: [Post] = (try? context.fetch(request)) ?? [] // nil means absolute failure
-//
-//        if let post = posts.first { // already exists, so make sure secondary attributes are up to date
-//            let updated: Bool = update(context: context, post: post,
-//                                       publicationDate: publicationDate, url: url, shortURL: shortURL,
-//                                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
-//            if updated {
-//                print("Updated info for post \(post.id) published on \(post.publicationDate)")
-//            }
-//            return post
-//        } else {
-//            let post = Post(context: context) // create new Member object
-//            post.title_ = title
-//            _ = update(context: context, post: post,
-//                       publicationDate: publicationDate, url: url, shortURL: shortURL,
-//                       author: author, thumbNailURL: thumbNailURL, synopsis: synopsis)
-//            print("Created new record for post \(post.id) published on \(post.publicationDate)")
-//            return post
-//        }
-//    }
-//
-//    // Update non-identifying attributes/properties within existing instance of class PhotoClub
-//    private static func update(context: NSManagedObjectContext, post: Post,
-//                               publicationDate: Date?, url: String?, shortURL: String?,
-//                               author: String?, thumbNailURL: String?, synopsis: String?
-//                              ) -> Bool {
-//        var modified: Bool = false
-//
-//        // function only works for non-optional Types.
-//        // If optional support needed, create variant with "inout Type?" instead of "inout Type"
-//        func updateIfChanged<Type>(update persistedValue: inout Type, with newValue: Type?) where Type: Equatable {
-//            if let newValue = newValue { // if newValue == nil, don't change persistedValue
-//                if newValue != persistedValue {
-//                    persistedValue = newValue
-//                    modified = true
-//                }
-//            }
-//        }
-//
-//        updateIfChanged(update: &post.publicationDate, with: publicationDate)
-//        updateIfChanged(update: &post.url, with: url)
-//        updateIfChanged(update: &post.shortURL, with: shortURL)
-//
-//        updateIfChanged(update: &post.author, with: author)
-//        updateIfChanged(update: &post.thumbNailURL, with: thumbNailURL)
-//        updateIfChanged(update: &post.synopsis, with: synopsis)
-//
-//        if modified {
-//            do {
-//                try context.save()
-//            } catch {
-//                fatalError("Update failed for for post \(post.id) published on \(post.publicationDate)" +
-//                           "\(error)")
-//            }
-//        }
-//        return modified
-//    }
-//
-// }
 
 extension Post { // convenience function
 
