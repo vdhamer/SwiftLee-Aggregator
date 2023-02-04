@@ -144,7 +144,6 @@ struct PostListView: View {
 
     func fillBlogPostsFromServer() {
         Task {
-            print("fillBlogPostsFromServer()")
             var page = 0
             var newPage: [Post] // list of posts on page
             var pageSize = 0 // we determine server's max page size dynamically (it's probably 10)

@@ -20,7 +20,9 @@ struct SwiftLeeAggregatorApp: App {
         let viewContext = persistenceController.container.viewContext
         // SwiftLee sometimes updates an article. The title and shortURL stay the same but publication date changes
         viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump // was .overwrite
-        print("Running with debug in SwilftLeeAggregatorApp.swift set to \(swiftLeeDebugMode)")
+        if swiftLeeDebugMode {
+            print("Running with debug in SwilftLeeAggregatorApp.swift set to \(swiftLeeDebugMode)")
+        }
     }
 
     var body: some Scene {
