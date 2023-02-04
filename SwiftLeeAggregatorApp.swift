@@ -14,20 +14,19 @@ struct SwiftLeeAggregatorApp: App {
 
     @Environment(\.scenePhase) var scenePhase
     private let persistenceController = PersistenceController.shared
-    private let swiftLeeDebugMode: Bool
+    private let swiftLeeDebugMode = false
 
     init() {
         let viewContext = persistenceController.container.viewContext
-        // SwiftLee sometimes updates an article: title and shortURL stay the same but publication date changes
-        viewContext.mergePolicy = NSMergePolicy.overwrite
-
-        swiftLeeDebugMode = true
+        // SwiftLee sometimes updates an article. The title and shortURL stay the same but publication date changes
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump // was .overwrite
         print("Running with debug in SwilftLeeAggregatorApp.swift set to \(swiftLeeDebugMode)")
     }
 
     var body: some Scene {
         WindowGroup {
-            PostListView(swiftLeeDebugModePayloadString: swiftLeeDebugMode ? PostListView_Previews.hardcodedJsonString : nil)
+            PostListView(swiftLeeDebugModePayloadString: swiftLeeDebugMode ?
+                         PostListView_Previews.hardcodedJsonString : nil)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _ in
