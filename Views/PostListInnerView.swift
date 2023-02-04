@@ -26,11 +26,11 @@ struct PostListInnerView: View {
         HStack(alignment: .top) {
             VStack {
                 Image(systemName: "circle.fill")
-                    .opacity(post.readIt ? 0 : 1) // hide and unhide
+                    .opacity(post.wasRead ? 0 : 1) // hide and unhide
                     .padding(.top, 4.5)
                     .foregroundColor(.brown)
                 Image(systemName: "star.fill")
-                    .opacity(post.star ? 1 : 0) // hide and unhide
+                    .opacity(post.hasStar ? 1 : 0) // hide and unhide
                     .padding(.top, 4.5)
                     .foregroundColor(.yellow)
             }
@@ -44,7 +44,7 @@ struct PostListInnerView: View {
                         .foregroundColor(.accentColor)
                 })
                     .environment(\.openURL, OpenURLAction { _ in
-                        post.readIt = true
+                        post.wasRead = true
                         Post.persistReadIt(objectId: post.objectID, context: context, newValue: true)
                         return .systemAction
                     })
@@ -58,18 +58,19 @@ struct PostListInnerView: View {
         }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button {
-                post.star.toggle()
-                Post.persistStar(objectId: post.objectID, context: context, newValue: post.star)
+                post.hasStar.toggle()
+                Post.persistStar(objectId: post.objectID, context: context, newValue: post.hasStar)
             } label: {
-                Star(current: post.star)
+                Star(current: post.hasStar)
             }
+            .tint(.yellow)
             Button {
-                post.readIt.toggle()
-                Post.persistReadIt(objectId: post.objectID, context: context, newValue: post.readIt)
+                post.wasRead.toggle()
+                Post.persistReadIt(objectId: post.objectID, context: context, newValue: post.wasRead)
             } label: {
-                Label("Unread", systemImage: post.readIt ? "envelope.fill" : "envelope.open.fill")
-                    .foregroundColor(.brown)
+                Label("Unread", systemImage: post.wasRead ? "circle.fill" : "circle.slash")
             }
+            .tint(.brown)
         }
     }
 

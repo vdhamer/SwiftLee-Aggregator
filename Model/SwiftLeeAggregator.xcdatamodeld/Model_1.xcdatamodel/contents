@@ -3,14 +3,14 @@
     <entity name="FeedDescriptor" representedClassName=".FeedDescriptor" syncable="YES" codeGenerationType="category"/>
     <entity name="Post" representedClassName=".Post" syncable="YES" codeGenerationType="category">
         <attribute name="author_" attributeType="String"/>
+        <attribute name="hasStar_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="publicationDate_" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="readIt_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="shortURL_" attributeType="String"/>
-        <attribute name="star_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="synopsis_" attributeType="String"/>
         <attribute name="thumbNailURL_" optional="YES" attributeType="String"/>
         <attribute name="title_" attributeType="String"/>
         <attribute name="url_" attributeType="String"/>
+        <attribute name="wasRead_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="shortURL_"/>

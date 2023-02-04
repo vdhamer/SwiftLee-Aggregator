@@ -144,14 +144,14 @@ extension Post {
         set { synopsis_ = newValue }
     }
 
-    var readIt: Bool { // computed property
-        get { readIt_ }
-        set { readIt_ = newValue }
+    var wasRead: Bool { // computed property
+        get { wasRead_ }
+        set { wasRead_ = newValue }
     }
 
-    var star: Bool { // computed property
-        get { star_ }
-        set { star_ = newValue }
+    var hasStar: Bool { // computed property
+        get { hasStar_ }
+        set { hasStar_ = newValue }
     }
 
 }
@@ -164,7 +164,7 @@ extension Post {
 
         guard let post = fetchPost(for: objectId, context: context) else { fatalError("Cannot find Post") }
 
-        post.readIt = newValue
+        post.wasRead = newValue
 
         do {
             try context.save()
@@ -179,7 +179,7 @@ extension Post {
 
         guard let post = fetchPost(for: objectId, context: context) else { fatalError("Cannot find Post") }
 
-        post.star = newValue
+        post.hasStar = newValue
 
         do {
             try context.save()
