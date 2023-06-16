@@ -78,9 +78,12 @@ struct PostListInnerView: View {
         var current: Bool
 
         var body: some View {
-            Image(systemName: current ? "star.slash" : "star.fill")
-                .foregroundStyle(.yellow, .gray, .red)
-                .symbolRenderingMode(.palette)
+            Label(
+                title: { Text(current ? "UnStar" : "Star").tint(.accentColor) },
+                icon: { Image(systemName: current ? "star.slash" : "star.fill")
+                        .foregroundStyle(.purple, .black, .red)
+                        .symbolRenderingMode(.palette) }
+            )
         }
     }
 
