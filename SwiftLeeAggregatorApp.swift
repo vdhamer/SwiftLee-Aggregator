@@ -28,7 +28,7 @@ struct SwiftLeeAggregatorApp: App {
     var body: some Scene {
         WindowGroup {
             PostListView(swiftLeeDebugModePayloadString: swiftLeeDebugMode ?
-                         PostListView_Previews.hardcodedJsonString : nil)
+                         hardcodedJsonString : nil)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
         .onChange(of: scenePhase) { _, _ in

@@ -180,59 +180,56 @@ struct PostListView: View {
 
 }
 
-struct PostListView_Previews: PreviewProvider {
-    @State static var searchText = ""
-    static var previews: some View {
-        PostListView(swiftLeeDebugModePayloadString: hardcodedJsonString)
-    }
+let description: String = """
+  <p>Hi there! After thinking a lot of starting my own blog, \
+  I\u{2019}ve finally made the decision to create one!\\n\
+  As iOS developer for my job I found myself experiencing a lot of problems, \
+  writing solutions and figuring out what\u{2019}s the best way to create this UI. \
+  Many times these are things to share with others, but until today I didn't had a place for that.\\n\
+  Expect posts about iOS related topics, posts about my WWDC visit coming June \
+  and libraries I\u{2019}ve settled up for iOS.
+"""
 
-    static let hardcodedJsonString: String = """
+let content: String = """
+  <p>Hi there! After thinking a lot of starting my own blog, \
+  I\u{2019}ve finally made the decision to create one!\\n\
+  As iOS developer for my job I found myself experiencing a lot of problems, \
+  writing solutions and figuring out what\u{2019}s the best way to create this UI. \
+  Many times these are things to share with others, but until today I didn't had a place for that.\\n\
+  Expect posts about iOS related topics, posts about my WWDC visit coming June \
+  and libraries I\u{2019}ve settled up for iOS.
+"""
+
+let hardcodedJsonString: String = """
+    {
+      "status": "ok",
+      "feed": {
+        "url": "https://www.avanderlee.com/feed",
+        "title": "SwiftLee",
+        "link": "https://www.avanderlee.com/",
+        "author": "",
+        "description": "A weekly blog about Swift, iOS and Xcode Tips and Tricks",
+        "image": ""
+      },
+      "items": [
         {
-          "status": "ok",
-          "feed": {
-            "url": "https://www.avanderlee.com/feed",
-            "title": "SwiftLee",
-            "link": "https://www.avanderlee.com/",
-            "author": "",
-            "description": "A weekly blog about Swift, iOS and Xcode Tips and Tricks",
-            "image": ""
-          },
-          "items": [
-            {
-              "title": "The start of a new blog",
-              "pubDate": "2015-05-02 12:52:51",
-              "link": "https://www.avanderlee.com/swift/the-start-of-a-new-blog/",
-              "guid": "https://www.avanderlee.com/?p=9",
-              "author": "Antoine van der Lee",
-              "thumbnail": "",
-              "description": "\(description)",
-              "content": "\(content)",
-              "enclosure": {},
-              "categories": [
-                "Swift"
-              ]
-            }
+          "title": "The start of a new blog",
+          "pubDate": "2015-05-02 12:52:51",
+          "link": "https://www.avanderlee.com/swift/the-start-of-a-new-blog/",
+          "guid": "https://www.avanderlee.com/?p=9",
+          "author": "Antoine van der Lee",
+          "thumbnail": "",
+          "description": "\(description)",
+          "content": "\(content)",
+          "enclosure": {},
+          "categories": [
+            "Swift"
           ]
         }
-        """
-
-    static let description: String = """
-      <p>Hi there! After thinking a lot of starting my own blog, \
-      I\u{2019}ve finally made the decision to create one!\\n\
-      As iOS developer for my job I found myself experiencing a lot of problems, \
-      writing solutions and figuring out what\u{2019}s the best way to create this UI. \
-      Many times these are things to share with others, but until today I didn't had a place for that.\\n\
-      Expect posts about iOS related topics, posts about my WWDC visit coming June \
-      and libraries I\u{2019}ve settled up for iOS.
+      ]
+    }
     """
 
-    static let content: String = """
-      <p>Hi there! After thinking a lot of starting my own blog, \
-      I\u{2019}ve finally made the decision to create one!\\n\
-      As iOS developer for my job I found myself experiencing a lot of problems, \
-      writing solutions and figuring out what\u{2019}s the best way to create this UI. \
-      Many times these are things to share with others, but until today I didn't had a place for that.\\n\
-      Expect posts about iOS related topics, posts about my WWDC visit coming June \
-      and libraries I\u{2019}ve settled up for iOS.
-    """
+#Preview {
+    PostListView(swiftLeeDebugModePayloadString: hardcodedJsonString)
 }
