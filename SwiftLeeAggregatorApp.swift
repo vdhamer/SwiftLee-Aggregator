@@ -31,7 +31,7 @@ struct SwiftLeeAggregatorApp: App {
                          PostListView_Previews.hardcodedJsonString : nil)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
-        .onChange(of: scenePhase) { _ in
+        .onChange(of: scenePhase) { _, _ in
             persistenceController.save() // when app moves to background
         }
     }
