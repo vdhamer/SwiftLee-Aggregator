@@ -35,13 +35,20 @@
 ## About The Project
 [![Product Name Screen Shot][product-screenshot]](https://github.com/vdhamer/SwiftLeeAggregator)
 
-This iOS app aggregates blog posts written by [SwiftLee](https://www.avanderlee.com) (Antoine van der Lee). SwiftLee has a weekly blog on Swift and iOS software development. 
+This iOS app aggregates blog posts written by [SwiftLee](https://www.avanderlee.com) (Antoine van der Lee). SwiftLee has a weekly blog about Swift and iOS software development. 
 
-Note that this app is only a **SwiftLee aggregator** and ***not* an app developed by SwiftLee**. The author of the blog posts (SwiftLee) has no responsibility for the aggregator app. And the developer of the app (vdHamer) has no control over the postings. In case you are wondering, both parties did align :slightly_smiling_face:. 
+Note that this app is only a **SwiftLee aggregator** and ***not* an app developed by SwiftLee**.
+The author of the blog posts (SwiftLee) has no responsibility for this aggregator app.
+And the developer of the app (vdHamer) has no control over the aggregated blog postings. 
+In case you are wondering, both parties did align :slightly_smiling_face:. 
 
-The aggregator uses a small database containing the metadata (title, date, URLs) of the postings on the SwiftLee site. It does not contain the blog posts themselves. When the app launches, the database is updated in background by fetching the SwiftLee website's RSS feed, passing the RSS through an online RSS-to-JSON convertor, decoding the JSON to memory, and merging the in-memory data with existing data in the database. The database (Apple's Core Data framework) improves app startup time, and furthermore tracks which posts have been viewed or labelled with a :star: by the user.
+The aggregator uses a small database containing the metadata (title, date, URLs) of the postings on the SwiftLee site.
+It does not contain the blog posts themselves.
+When the app launches, the database is updated in background by fetching the SwiftLee website's RSS feed, 
+passing the RSS through an online RSS-to-JSON convertor, decoding the JSON to memory, and merging the in-memory data with existing data in the database.
+The database (Apple's Core Data framework) improves app startup time, and furthermore tracks which posts have been viewed or labelled with a :star: by the user.
 
-The minimum required iOS version is 17.0 (which is in beta as of Jun 2023, use an older commit if you need iOS 16.0 support).
+The minimum required iOS version is 17.6.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
