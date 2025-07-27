@@ -14,7 +14,7 @@ struct SwiftLeeAggregatorApp: App {
 
     @Environment(\.scenePhase) var scenePhase
     private let persistenceController = PersistenceController.shared
-    private let swiftLeeDebugMode = false
+    @State private var swiftLeeDebugMode = false // @State prevents Xcode warning that if { } block is never executed
 
     init() {
         let viewContext = persistenceController.container.viewContext
